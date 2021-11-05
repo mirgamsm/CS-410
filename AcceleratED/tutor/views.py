@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import  AuthenticationForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
+from .forms import UserRegistrationForm
 
 
 
@@ -19,7 +20,7 @@ def login_view(request):
             user = form.get_user()
             login(request, user)
             # redirect the user to index page
-            return redirect('index')
+            return redirect('profile')
     else:
         # Create an empty instance of Django's AuthenticationForm to generate the necessary html on the template.
         form = AuthenticationForm()
@@ -32,7 +33,7 @@ def register_view(request):
         # We use Django's UserCreationForm which is a model created by Django to create a new user.
         # UserCreationForm has three fields by default: username (from the user model), password1, and password2.
         # If you want to include email as well, switch to our own custom form called UserRegistrationForm
-        form = UserCreationForm(request.POST)
+        form = UserRegistrationForm(request.POST)
         # check whether it's valid: for example it verifies that password1 and password2 match
         if form.is_valid():
             form.save()
@@ -43,7 +44,7 @@ def register_view(request):
             return redirect('login')
     else:
         # Create an empty instance of Django's UserCreationForm to generate the necessary html on the template.
-        form = UserCreationForm()
+        form = UserRegistrationForm()
     return render(request, 'tutor/register.html', {'form': form})
 
 

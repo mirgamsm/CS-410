@@ -1,1 +1,9 @@
-<p>Edit Page</p>
+{% extends 'tutor/base.html' %}
+{% load crispy_forms_filters %}
+{% block title %}
+Edit Profile
+{% endblock %}
+{% block body %}
+<a href="{% url 'profile' %}" class="btn btn-success btn-block btn-lg"><i class="fas fa-plus"></i>
+    MY Profile</a>
+{% endblock %}
