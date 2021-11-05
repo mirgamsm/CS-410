@@ -6,4 +6,12 @@ My Profile
 {% block body %}
 <a href="{% url 'edit' %}" class="btn btn-success btn-block btn-lg"><i class="fas fa-plus"></i>
     Edit Profile</a>
-{% endblock %}
+
+    <h1>Hello {{user.email}}</h1>
+    {% for tutors in Tutor %}
+    <h2>Your First Name is {{tutors.firstname}}</h2>
+    <h2>Your Last Name is {{tutors.lastname}}</h2>
+    <h2>Introduction: {{tutors.introduction}}</h2>
+
+    {% endfor %}
+    {% endblock %}

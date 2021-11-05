@@ -2,11 +2,15 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import  AuthenticationForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegistrationForm
+from .forms import UserRegistrationForm, tutorIntakeform
+
+from django.contrib.auth import get_user_model
+from .models import Tutor
 
 
 
 # Create your views here.
+
 def login_view(request):
     # this function authenticates the user based on username and password
     # AuthenticationForm is a form for logging a user in.
@@ -48,9 +52,27 @@ def register_view(request):
     return render(request, 'tutor/register.html', {'form': form})
 
 
+@login_required(login_url='login')
 def edit_view(request):
-    return render(request, 'tutor/edit.html')
+    if request.method == 'POST':
+        form = tutorIntakeform(request.POST)
+        if form.is_valid():
+            media =form.save()
+            User = get_user_model()
+            media.owner = str(User.objects.get(email=request.user.email))
+            media.save()
+            return redirect('profile')
+    else:
+        form = tutorIntakeform()
+        User = get_user_model()
+        user = User.objects.get(email=request.user.email)
+    return render(request, 'tutor/edit.html', {'form': form})
 
 
+@login_required(login_url='login')
 def profile_view(request):
-    return render(request, 'tutor/profile.html')
+    User = get_user_model()
+    user = User.objects.get(email=request.user.email)
+    tutor = Tutor.objects.filter(owner=user)
+    return render(request, 'tutor/profile.html',{"Tutor": tutor})
+

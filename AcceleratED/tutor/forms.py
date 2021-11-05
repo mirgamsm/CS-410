@@ -3,6 +3,8 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 
+from tutor.models import Tutor
+
 
 
 class UserRegistrationForm(UserCreationForm):
@@ -11,3 +13,16 @@ class UserRegistrationForm(UserCreationForm):
     class Meta:
         model = get_user_model()
         fields = ['email', 'password1', 'password2']
+
+
+class tutorIntakeform(forms.ModelForm):
+    class Meta:
+        model =Tutor
+        fields = ('firstname', 'lastname', 'introduction', 'languages',
+                 'phonenumber', 'gender', 'education', 'major',
+                'minor', 'experience', 'statecert', 'phonicsex', 'employment',
+                'curremployment', 'employer', 'employeraddress', 'currreference',
+                'teachercharacteristics', 'abilitiesquestion', 'availability'
+                )
+        
+        
