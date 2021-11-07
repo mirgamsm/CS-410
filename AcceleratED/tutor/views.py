@@ -66,7 +66,7 @@ def edit_view(request):
         form = tutorIntakeform()
         User = get_user_model()
         user = User.objects.get(email=request.user.email)
-    return render(request, 'tutor/edit.html', {'form': form})
+    return render(request, 'tutor/edit.html', { 'authenticated': True, 'form': form })
 
 
 @login_required(login_url='login')
@@ -74,5 +74,5 @@ def profile_view(request):
     User = get_user_model()
     user = User.objects.get(email=request.user.email)
     tutor = Tutor.objects.filter(owner=user)
-    return render(request, 'tutor/profile.html',{"Tutor": tutor})
+    return render(request, 'tutor/profile.html', { 'authenticated': True, "Tutor": tutor })
 

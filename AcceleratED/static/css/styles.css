@@ -1,0 +1,31 @@
+body{
+    background-color: #a6aae6;
+    padding-top: 50px;
+}
+
+.card{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: #dcdfff;
+}
+.asteriskField{
+    display: none;
+}
+
+form > .alert > ul > li{
+    list-style: none;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
+    color: #e0e0e0;
+    background-color: #e0e0e0;
+    border-color: #395caa; /*set the color you want here*/
+}
+
+.btn-primary{
+    background-color: #578301;
+    border-color: #ffffff;
+}
+
+tr {
+    border-bottom: 2px solid #a6aae6
+}

@@ -3,7 +3,6 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from multiselectfield import MultiSelectField
 
-
 class UserManager(BaseUserManager):
     """Define a model manager for User model with no username field."""
 
@@ -65,12 +64,11 @@ class Tutor(models.Model):
         ('Other', 'Other')
     )
     EMPLOYMENT_CHOICES = (
-        ('Fulltime', 'Fulltime'),
+        ('Full Time', 'Full Time'),
         ('Part Time', 'Part Time'),
         ('College Student', 'College Student'),
         ('Retired', 'Retired'),
         ('Other', 'Other')
-
     )
     STATE_CHOICES = (
         (
@@ -138,17 +136,18 @@ class Tutor(models.Model):
         ('Male', 'Male'),
         ('Female', 'Female'),
         ('Non-Binary', 'Non-Binary'),
+        ('Other', 'Other')
 
     )
     DEGREE_CHOICES = (
         ('None', 'None'),
         ('CIN', 'Currently Enrolled In College'),
-        ('AS', 'Associate'),
+        ('AS', 'Associate\'s Degree'),
         ('TECH', 'Technical Certification'),
-        ('BAS', 'BA/BS/Etc . . .'),
-        ('MA', 'MA/MS/Etc...'),
+        ('BAS', 'Bachelor\'s Degree'),
+        ('MA', 'Master\'s Degree'),
         ('ED', 'Education Specialist/6th Year/Etc . . .'),
-        ('EDD', 'ED.D/PH.D/Etc . . .')
+        ('EDD', 'Doctorate or Higher')
     )
     YESNO = (
         ('Yes', 'Yes'),
@@ -158,24 +157,27 @@ class Tutor(models.Model):
         ('AM', 'Part Time AM'),
         ('PM', 'Full Time PM')
     )
-    firstname = models.CharField(max_length=20, blank=True)
-    lastname = models.CharField(max_length=20, blank=True)
+    
+    firstname = models.CharField(max_length=20, blank=True, verbose_name='First Name')
+    lastname = models.CharField(max_length=20, blank=True, verbose_name='Last Name')
+    birthday = models.DateField(auto_now=False, null=True, blank=True)
     phonenumber = models.CharField(max_length=12, blank=True, verbose_name='Phone Number')
-    gender = models.CharField(max_length=10, choices=GENDER_CHOICES, default='Male')
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES, blank=True, default='None')
     introduction = models.TextField(blank=True, verbose_name='Introduction (200 Words or less)')
-    languages = MultiSelectField(choices=LANGUAGE_CHOICES, default="English")
-    education = models.CharField(max_length=60, choices=DEGREE_CHOICES, blank=True, default='HS')
+    languages = MultiSelectField(choices=LANGUAGE_CHOICES, default="None")
+    education = models.CharField(max_length=60, choices=DEGREE_CHOICES, blank=True, default='None',
+        verbose_name='Highest Level of Education')
     major = models.CharField(max_length=20, blank=True, verbose_name='Major (If Applicable)')
     minor = models.CharField(max_length=20, blank=True, verbose_name='Minor (If Applicable)')
     experience = models.CharField(max_length=4, choices=YESNO, blank=True, verbose_name='Are You A Certified Teacher?')
-    statecert = models.CharField(max_length=5, choices=STATE_CHOICES, verbose_name='Please Choose The State You Are Certified In:', default='None')
+    statecert = models.CharField(max_length=5, choices=STATE_CHOICES, verbose_name='Please Choose The State In Which You are Certified:', default='None')
     phonicsex = MultiSelectField(choices=PHONICS_CHOICES, blank=True, verbose_name='Choose Any Phonics Programs You Have Experience With:')
-    employment = models.CharField(max_length=20, choices=EMPLOYMENT_CHOICES, blank=True)
-    curremployment = models.CharField(max_length=30, blank=True)
-    employer = models.CharField(max_length=20, blank=True, verbose_name='Employer')
-    employeraddress = models.CharField(max_length=30, blank=True, verbose_name='Employer Address')
-    currreference = models.CharField(max_length=20, blank=True, verbose_name='Supervisor/Reference Contact Information:')
-    teachercharacteristics = models.TextField(max_length=200, blank=True, verbose_name='What Characteristics Make A Good Teacher: (200 Words or less)')
-    abilitiesquestion = models.TextField(max_length=200, blank=True, verbose_name='How Would You Address A Range Of Abilities In Your Classroom: (200 Words or less)')
+    employment = models.CharField(max_length=20, choices=EMPLOYMENT_CHOICES, blank=True, verbose_name='Employment Status')
+    curremployment = models.CharField(max_length=30, blank=True, verbose_name='Current or Most Recent Job Title (If Applicable)')
+    employer = models.CharField(max_length=30, blank=True, verbose_name='Employer (If Applicable)')
+    employeraddress = models.CharField(max_length=30, blank=True, verbose_name='Employer Address (If Applicable)')
+    currreference = models.CharField(max_length=20, blank=True, verbose_name='Supervisor/Reference Contact Information (If Applicable)')
+    teachercharacteristics = models.TextField(max_length=200, blank=True, verbose_name='What Characteristics Make A Good Teacher: (200 Words or Less)')
+    abilitiesquestion = models.TextField(max_length=200, blank=True, verbose_name='How Would You Address A Range Of Abilities In Your Classroom: (200 Words or Less)')
     availability = models.CharField(max_length=20, choices=AVAILABILITY_CHOICES, blank=True, verbose_name='Choose Your Availability:')
     owner = models.CharField(max_length=150, blank=True)

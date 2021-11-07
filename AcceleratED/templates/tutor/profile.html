@@ -4,14 +4,97 @@
 My Profile
 {% endblock %}
 {% block body %}
-<a href="{% url 'edit' %}" class="btn btn-success btn-block btn-lg"><i class="fas fa-plus"></i>
-    Edit Profile</a>
 
-    <h1>Hello {{user.email}}</h1>
-    {% for tutors in Tutor %}
-    <h2>Your First Name is {{tutors.firstname}}</h2>
-    <h2>Your Last Name is {{tutors.lastname}}</h2>
-    <h2>Introduction: {{tutors.introduction}}</h2>
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h1>Welcome to AcceleratED Learning!</h1>
+                    <a href="{% url 'edit' %}" class="btn btn-outline-primary" >Edit My Profile</a>
+                    <h1></h1>
 
-    {% endfor %}
-    {% endblock %}
+                    {% for tutor in Tutor %}
+                        <h3>Profile Information for {{tutor.firstname}} {{tutor.lastname}}</h3>
+                        <table style="width:100%">
+                            <tr>
+                                <th style="width:30%">Name</th>
+                                <td>{{tutor.firstname}} {{tutor.lastname}}</td>
+                            </tr>
+                            <tr>
+                                <th>Phone Number</th>
+                                <td>{{tutor.phonenumber}}</td>
+                            </tr>
+                            <tr>
+                                <th>Gender</th>
+                                <td>{{tutor.gender}}</td>
+                            </tr>
+                            <tr>
+                                <th>Introduction</th>
+                                <td>{{tutor.introduction}}</td>
+                            </tr>
+                            <tr>
+                                <th>Languages</th>
+                                <td>{{tutor.languages}}</td>
+                            </tr>
+                            <tr>
+                                <th>Highest Level of Education</th>
+                                <td>{{tutor.education}}</td>
+                            </tr>
+                            <tr>
+                                <th>Major (If Applicable)</th>
+                                <td>{{tutor.major}}</td>
+                            </tr>
+                            <tr>
+                                <th>Minor (If Applicable)</th>
+                                <td>{{tutor.minor}}</td>
+                            </tr>
+                            <tr>
+                                <th>Certified Teacher</th>
+                                <td>{{tutor.experience}}</td>
+                            </tr>
+                            <tr>
+                                <th>Certified In</th>
+                                <td>{{tutor.statecert}}</td>
+                            </tr>
+                            <tr>
+                                <th>Phonics Programs</th>
+                                <td>{{tutor.phonicsex}}</td>
+                            </tr>
+                            <tr>
+                                <th>Employment Status</th>
+                                <td>{{tutor.employment}}</td>
+                            </tr>
+                            <tr>
+                                <th>Most Recent Job Title</th>
+                                <td>{{tutor.curremployment}}</td>
+                            </tr>
+                            <tr>
+                                <th>Current Employer</th>
+                                <td>{{tutor.employer}}</td>
+                            </tr>
+                            <tr>
+                                <th>Employer Address</th>
+                                <td>{{tutor.amployeraddress}}</td>
+                            </tr>
+                            <tr>
+                                <th>Reference</th>
+                                <td>{{tutor.currreference}}</td>
+                            </tr>
+                            <tr>
+                                <th>Characteristics of a Good Teacher</th>
+                                <td>{{tutor.teachercharacteristics}}</td>
+                            </tr>
+                            <tr>
+                                <th>How to Address a Range of Abilities</th>
+                                <td>{{tutor.abilitiesquestion}}</td>
+                            </tr>
+                        </table>
+                        <h1></h1>
+                    {% endfor %}
+                </div>
+            </div>
+    
+        </div>
+    </div>
+
+{% endblock %}

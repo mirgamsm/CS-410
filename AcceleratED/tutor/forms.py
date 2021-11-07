@@ -18,8 +18,8 @@ class UserRegistrationForm(UserCreationForm):
 class tutorIntakeform(forms.ModelForm):
     class Meta:
         model =Tutor
-        fields = ('firstname', 'lastname', 'introduction', 'languages',
-                 'phonenumber', 'gender', 'education', 'major',
+        fields = ('firstname', 'lastname', 'phonenumber', 'birthday', 'gender',
+                'introduction', 'languages','education', 'major',
                 'minor', 'experience', 'statecert', 'phonicsex', 'employment',
                 'curremployment', 'employer', 'employeraddress', 'currreference',
                 'teachercharacteristics', 'abilitiesquestion', 'availability'
