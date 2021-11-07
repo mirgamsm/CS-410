@@ -155,7 +155,8 @@ class Tutor(models.Model):
     )
     AVAILABILITY_CHOICES = (
         ('AM', 'Part Time AM'),
-        ('PM', 'Full Time PM')
+        ('PM', 'Part Time PM'),
+        ('F', 'Full Time (AM and PM)')
     )
     
     firstname = models.CharField(max_length=20, blank=True, verbose_name='First Name')
@@ -163,8 +164,8 @@ class Tutor(models.Model):
     birthday = models.DateField(auto_now=False, null=True, blank=True)
     phonenumber = models.CharField(max_length=12, blank=True, verbose_name='Phone Number')
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES, blank=True, default='None')
-    introduction = models.TextField(blank=True, verbose_name='Introduction (200 Words or less)')
-    languages = MultiSelectField(choices=LANGUAGE_CHOICES, default="None")
+    introduction = models.TextField(blank=True, verbose_name='Introduction (Describe Yourself in 200 Words or Less)')
+    languages = MultiSelectField(choices=LANGUAGE_CHOICES, blank=True, default="None", verbose_name='Languages Spoken Fluently')
     education = models.CharField(max_length=60, choices=DEGREE_CHOICES, blank=True, default='None',
         verbose_name='Highest Level of Education')
     major = models.CharField(max_length=20, blank=True, verbose_name='Major (If Applicable)')
