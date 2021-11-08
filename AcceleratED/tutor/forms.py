@@ -15,14 +15,20 @@ class UserRegistrationForm(UserCreationForm):
         fields = ['email', 'password1', 'password2']
 
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
 class tutorIntakeform(forms.ModelForm):
     class Meta:
         model =Tutor
-        fields = ('firstname', 'lastname', 'phonenumber', 'birthday', 'gender',
+        fields = ('firstname', 'lastname', 'birthday', 'phonenumber', 'gender',
                 'introduction', 'languages','education', 'major',
                 'minor', 'experience', 'statecert', 'phonicsex', 'employment',
-                'curremployment', 'employer', 'employeraddress', 'currreference',
+                'curremployment', 'employer',
+                'employeraddress', 'employercity', 'employerstate', 'employerzip',
+                'currreference',
                 'teachercharacteristics', 'abilitiesquestion', 'availability'
                 )
+        widgets = { 'birthday' : DateInput()}
         
         

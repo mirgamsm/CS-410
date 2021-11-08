@@ -17,7 +17,7 @@ form > .alert > ul > li{
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
-    color: #e0e0e0;
+    color: #395caa;
     background-color: #e0e0e0;
     border-color: #395caa; /*set the color you want here*/
 }

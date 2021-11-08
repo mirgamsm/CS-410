@@ -2,6 +2,7 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from multiselectfield import MultiSelectField
+from phone_field import PhoneField
 from django.conf import settings
 
 class UserManager(BaseUserManager):
@@ -48,7 +49,6 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
 
     objects = UserManager()
-
 
 class Tutor(models.Model):
     PHONICS_CHOICES = (
@@ -163,7 +163,7 @@ class Tutor(models.Model):
     firstname = models.CharField(max_length=20, blank=True, verbose_name='First Name')
     lastname = models.CharField(max_length=20, blank=True, verbose_name='Last Name')
     birthday = models.DateField(auto_now=False, null=True, blank=True)
-    phonenumber = models.CharField(max_length=12, blank=True, verbose_name='Phone Number')
+    phonenumber = PhoneField(blank=True, verbose_name='Phone Number')
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES, blank=True, default='None')
     introduction = models.TextField(blank=True, verbose_name='Introduction (Describe Yourself in 200 Words or Less)')
     languages = MultiSelectField(choices=LANGUAGE_CHOICES, blank=True, default="None", verbose_name='Languages Spoken Fluently')
@@ -178,6 +178,9 @@ class Tutor(models.Model):
     curremployment = models.CharField(max_length=30, blank=True, verbose_name='Current or Most Recent Job Title (If Applicable)')
     employer = models.CharField(max_length=30, blank=True, verbose_name='Employer (If Applicable)')
     employeraddress = models.CharField(max_length=30, blank=True, verbose_name='Employer Address (If Applicable)')
+    employercity = models.CharField(max_length=30, blank=True, verbose_name='City')
+    employerstate = models.CharField(max_length=5, choices=STATE_CHOICES, verbose_name='State', default='None')
+    employerzip = models.CharField(max_length=30, blank=True, verbose_name='Zip Code')
     currreference = models.CharField(max_length=20, blank=True, verbose_name='Supervisor/Reference Contact Information (If Applicable)')
     teachercharacteristics = models.TextField(max_length=200, blank=True, verbose_name='What Characteristics Make A Good Teacher: (200 Words or Less)')
     abilitiesquestion = models.TextField(max_length=200, blank=True, verbose_name='How Would You Address A Range Of Abilities In Your Classroom: (200 Words or Less)')
