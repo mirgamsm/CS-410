@@ -2,6 +2,7 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from multiselectfield import MultiSelectField
+from django.conf import settings
 
 class UserManager(BaseUserManager):
     """Define a model manager for User model with no username field."""
@@ -158,7 +159,7 @@ class Tutor(models.Model):
         ('PM', 'Part Time PM'),
         ('F', 'Full Time (AM and PM)')
     )
-    
+    email = models.OneToOneField(User, on_delete=models.CASCADE)
     firstname = models.CharField(max_length=20, blank=True, verbose_name='First Name')
     lastname = models.CharField(max_length=20, blank=True, verbose_name='Last Name')
     birthday = models.DateField(auto_now=False, null=True, blank=True)
@@ -167,7 +168,7 @@ class Tutor(models.Model):
     introduction = models.TextField(blank=True, verbose_name='Introduction (Describe Yourself in 200 Words or Less)')
     languages = MultiSelectField(choices=LANGUAGE_CHOICES, blank=True, default="None", verbose_name='Languages Spoken Fluently')
     education = models.CharField(max_length=60, choices=DEGREE_CHOICES, blank=True, default='None',
-        verbose_name='Highest Level of Education')
+    verbose_name='Highest Level of Education')
     major = models.CharField(max_length=20, blank=True, verbose_name='Major (If Applicable)')
     minor = models.CharField(max_length=20, blank=True, verbose_name='Minor (If Applicable)')
     experience = models.CharField(max_length=4, choices=YESNO, blank=True, verbose_name='Are You A Certified Teacher?')
@@ -181,4 +182,3 @@ class Tutor(models.Model):
     teachercharacteristics = models.TextField(max_length=200, blank=True, verbose_name='What Characteristics Make A Good Teacher: (200 Words or Less)')
     abilitiesquestion = models.TextField(max_length=200, blank=True, verbose_name='How Would You Address A Range Of Abilities In Your Classroom: (200 Words or Less)')
     availability = models.CharField(max_length=20, choices=AVAILABILITY_CHOICES, blank=True, verbose_name='Choose Your Availability:')
-    owner = models.CharField(max_length=150, blank=True)

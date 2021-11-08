@@ -3,9 +3,10 @@ from django.contrib.auth.forms import  AuthenticationForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegistrationForm, tutorIntakeform
-
+from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from .models import Tutor
+from django.shortcuts import get_object_or_404
 
 
 
@@ -41,6 +42,9 @@ def register_view(request):
         # check whether it's valid: for example it verifies that password1 and password2 match
         if form.is_valid():
             form.save()
+            # User = get_user_model()
+            # new_Tutor = Tutor(email=User)
+            # new_Tutor.save()
             # if you want to login the user directly after saving, use the following two lines instead, and redirect to index
             # user = form.save()
             # login(user)
@@ -54,18 +58,24 @@ def register_view(request):
 
 @login_required(login_url='login')
 def edit_view(request):
-    if request.method == 'POST':
-        form = tutorIntakeform(request.POST)
-        if form.is_valid():
-            media =form.save()
-            User = get_user_model()
-            media.owner = str(User.objects.get(email=request.user.email))
-            media.save()
+    # User = get_user_model()
+    # profile = User.objects.get(pk=Tutor.email)
+    # profile = Tutor.objects.select_related()
+    profiles = Tutor.objects.get(email_id=request.user.id)
+    # profile =User.objects.exclude(pk__in=profiles)
+
+    
+    form = tutorIntakeform(request.POST or None, instance=profiles)
+    if form.is_valid():
+            form.save()
+            # User = get_user_model()
+            # media.owner = str(User.objects.get(email=request.user.email))
+            # media.save()
             return redirect('profile')
     else:
         form = tutorIntakeform()
-        User = get_user_model()
-        user = User.objects.get(email=request.user.email)
+        # User = get_user_model()
+        # user = User.objects.get(email=request.user.email)
     return render(request, 'tutor/edit.html', { 'authenticated': True, 'form': form })
 
 
@@ -73,6 +83,6 @@ def edit_view(request):
 def profile_view(request):
     User = get_user_model()
     user = User.objects.get(email=request.user.email)
-    tutor = Tutor.objects.filter(owner=user)
-    return render(request, 'tutor/profile.html', { 'authenticated': True, "Tutor": tutor })
+    tutor = Tutor.objects.filter(email=user)
+    return render(request, 'tutor/profile.html', {'authenticated': True, "Tutor": tutor})
 
