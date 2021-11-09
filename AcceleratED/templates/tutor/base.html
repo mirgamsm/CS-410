@@ -16,7 +16,7 @@
     <link rel="icon" type="image/png" href="/static/images/logo1.png">
 
     <title>
-        {% block title %}
+        {% block title %}git 
         {% endblock %}
     </title>
 
@@ -48,11 +48,11 @@
                 <img src="/static/images/logo1.png" width="75" alt="">
                 AcceleratED Learning
             </a>
-            {% endif %}
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            {% endif %}
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
                 <!--- Fix logout button later -- need to do session stuff --->
@@ -67,7 +67,7 @@
                 </ul>
                 <ul class="navbar-nav mr-auto">
                 </ul>
-                <a href="{% url 'login' %}" class="btn btn-light">Logout</a>
+                <a href="{% url 'logout' %}" class="btn btn-light">Logout</a>
                 {% else %}
                 <ul class="navbar-nav mr-auto">
                 </ul>

@@ -86,3 +86,13 @@ def profile_view(request):
     tutor = Tutor.objects.filter(email=user)
     return render(request, 'tutor/profile.html', {'authenticated': True, "Tutor": tutor})
 
+def del_account(request):
+    User = get_user_model()
+    current =User.objects.get(id=request.user.id)
+    current.delete()
+    return redirect('login')
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
+

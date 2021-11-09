@@ -11,6 +11,7 @@ My Profile
                 <div class="card-body">
                     <h1>Welcome to AcceleratED Learning!</h1>
                     <a href="{% url 'edit' %}" class="btn btn-outline-primary" >Edit My Profile</a>
+                    <a href="{% url 'delete' %}" class="btn btn-outline-primary del_btn">Delete</a>
                     <h1></h1>
 
                     {% for tutor in Tutor %}

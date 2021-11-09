@@ -18,6 +18,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Use Custom User 
 AUTH_USER_MODEL = 'tutor.User'
 
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 

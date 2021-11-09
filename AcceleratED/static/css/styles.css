@@ -30,3 +30,6 @@ form > .alert > ul > li{
 tr {
     border-bottom: 2px solid #73c543
 }
+.del_btn{
+    background-color: #f44336;
+}

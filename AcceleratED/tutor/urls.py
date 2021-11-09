@@ -4,8 +4,9 @@ from . import views
 from django.urls import path
 
 urlpatterns = [
-
     path('register/', views.register_view, name='register'),
     path('edit/', views.edit_view, name='edit'),
-    path('profile/', views.profile_view, name='profile')
+    path('profile/', views.profile_view, name='profile'),
+    path('delete/', views.del_account, name='delete'),
+    path('logout/', views.logout_view, name='logout')
 ]
