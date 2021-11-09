@@ -18,17 +18,46 @@ class UserRegistrationForm(UserCreationForm):
 class DateInput(forms.DateInput):
     input_type = 'date'
 
-class tutorIntakeform(forms.ModelForm):
+# class tutorIntakeform(forms.ModelForm):
+#     class Meta:
+#         model =Tutor
+#         fields = ('firstname', 'lastname', 'birthday', 'phonenumber', 'gender',
+#                 'introduction', 'languages','education', 'major',
+#                 'minor', 'experience', 'statecert', 'phonicsex', 'employment',
+#                 'curremployment', 'employer',
+#                 'employeraddress', 'employercity', 'employerstate', 'employerzip',
+#                 'currreference',
+#                 'teachercharacteristics', 'abilitiesquestion', 'availability'
+#                 )
+#         widgets = { 'birthday' : DateInput()}
+        
+
+class tutorPersonalform(forms.ModelForm):
+    class Meta:
+        model = Tutor
+        fields = ('firstname', 'lastname', 'birthday', 'phonenumber', 'gender',
+                  'introduction', 'languages'
+                  )
+        widgets = {'birthday': DateInput()}
+
+class tutorEduform(forms.ModelForm):
     class Meta:
         model =Tutor
-        fields = ('firstname', 'lastname', 'birthday', 'phonenumber', 'gender',
-                'introduction', 'languages','education', 'major',
-                'minor', 'experience', 'statecert', 'phonicsex', 'employment',
-                'curremployment', 'employer',
-                'employeraddress', 'employercity', 'employerstate', 'employerzip',
-                'currreference',
+        fields = ('education', 'major',
+                'minor', 'experience', 'statecert', 'phonicsex', )
+
+
+class tutorWorkform(forms.ModelForm):
+    class Meta:
+        model = Tutor
+        fields = ('employment',
+                  'curremployment', 'employer',
+                  'employeraddress', 'employercity', 'employerstate', 'employerzip',
+                  'currreference',
+                  )
+class tutorQAform(forms.ModelForm):
+    class Meta:
+        model =Tutor
+        fields = (
                 'teachercharacteristics', 'abilitiesquestion', 'availability'
                 )
-        widgets = { 'birthday' : DateInput()}
-        
-        

@@ -2,11 +2,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import  AuthenticationForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegistrationForm, tutorIntakeform
+from .forms import UserRegistrationForm, tutorPersonalform, tutorEduform, tutorWorkform, tutorQAform
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from .models import Tutor
-from django.shortcuts import get_object_or_404
+
 
 
 
@@ -58,25 +58,7 @@ def register_view(request):
 
 @login_required(login_url='login')
 def edit_view(request):
-    # User = get_user_model()
-    # profile = User.objects.get(pk=Tutor.email)
-    # profile = Tutor.objects.select_related()
-    profiles = Tutor.objects.get(email_id=request.user.id)
-    # profile =User.objects.exclude(pk__in=profiles)
-
-    
-    form = tutorIntakeform(request.POST or None, instance=profiles)
-    if form.is_valid():
-            form.save()
-            # User = get_user_model()
-            # media.owner = str(User.objects.get(email=request.user.email))
-            # media.save()
-            return redirect('profile')
-    else:
-        form = tutorIntakeform()
-        # User = get_user_model()
-        # user = User.objects.get(email=request.user.email)
-    return render(request, 'tutor/edit.html', { 'authenticated': True, 'form': form })
+    return render(request, 'tutor/edit.html', {'authenticated': True})
 
 
 @login_required(login_url='login')
@@ -96,3 +78,49 @@ def logout_view(request):
     logout(request)
     return redirect('login')
 
+
+@login_required(login_url='login')
+def edit_personal_view(request):
+    profiles = Tutor.objects.get(email_id=request.user.id)
+    form = tutorPersonalform(request.POST or None, instance=profiles)
+    if form.is_valid():
+        form.save()
+        return redirect('profile')
+    else:
+        form = tutorPersonalform()
+    return render(request, 'tutor/personal.html', {'authenticated': True, 'form': form})
+    
+@login_required(login_url='login')    
+def edit_edu_view(request):
+    profiles = Tutor.objects.get(email_id=request.user.id)
+    form = tutorEduform(request.POST or None, instance=profiles)
+    if form.is_valid():
+        form.save()
+        return redirect('profile')
+    else:
+        form = tutorEduform()
+    return render(request, 'tutor/edu.html', {'authenticated': True, 'form': form})
+
+
+@login_required(login_url='login')
+def edit_work_view(request):
+    profiles = Tutor.objects.get(email_id=request.user.id)
+    form = tutorWorkform(request.POST or None, instance=profiles)
+    if form.is_valid():
+        form.save()
+        return redirect('profile')
+    else:
+        form = tutorWorkform()
+    return render(request, 'tutor/work.html', {'authenticated': True, 'form': form})
+
+
+@login_required(login_url='login')
+def edit_qa_view(request):
+    profiles = Tutor.objects.get(email_id=request.user.id)
+    form = tutorQAform(request.POST or None, instance=profiles)
+    if form.is_valid():
+        form.save()
+        return redirect('profile')
+    else:
+        form = tutorQAform()
+    return render(request, 'tutor/qa.html', {'authenticated': True, 'form': form})

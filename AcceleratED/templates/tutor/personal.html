@@ -1,0 +1,40 @@
+{% extends 'tutor/base.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% block title %}
+Edit Profile
+{% endblock %}
+{% block body %}
+
+<div class="row justify-content-center">
+    <div class="col-10">
+        <div class="card">
+            <div class="card-body">
+
+                <h1>Enter Your Information</h1>
+                
+                <form method="post">
+                    {% csrf_token %}
+
+                    <div class="row">
+                        <div class="col-6">
+                          {{ form.firstname|as_crispy_field }}
+                        </div>
+                        <div class="col-6">
+                          {{ form.lastname|as_crispy_field }}
+                        </div>
+                      </div>
+                    {{ form.birthday|as_crispy_field }}
+                    {{ form.phonenumber|as_crispy_field }}
+                    {{ form.gender|as_crispy_field }}
+                    {{ form.introduction|as_crispy_field }}
+                    {{ form.languages|as_crispy_field }}
+                    <button type="submit" class="btn btn-outline-primary">Submit</button>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
