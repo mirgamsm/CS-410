@@ -165,7 +165,7 @@ class Tutor(models.Model):
     birthday = models.DateField(auto_now=False, null=True, blank=True)
     phonenumber = PhoneField(blank=True, verbose_name='Phone Number')
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES, blank=True, default='None')
-    introduction = models.TextField(blank=True, verbose_name='Introduction (Describe Yourself in 200 Words or Less)')
+    introduction = models.TextField(max_length=1500, blank=True, verbose_name='Introduction (Describe Yourself in 200 Words or Less)')
     languages = MultiSelectField(choices=LANGUAGE_CHOICES, blank=True, default="None", verbose_name='Languages Spoken Fluently')
     education = models.CharField(max_length=60, choices=DEGREE_CHOICES, blank=True, default='None',
     verbose_name='Highest Level of Education')
@@ -182,6 +182,7 @@ class Tutor(models.Model):
     employerstate = models.CharField(max_length=5, choices=STATE_CHOICES, verbose_name='State', default='None')
     employerzip = models.CharField(max_length=30, blank=True, verbose_name='Zip Code')
     currreference = models.CharField(max_length=20, blank=True, verbose_name='Supervisor/Reference Contact Information (If Applicable)')
-    teachercharacteristics = models.TextField(max_length=200, blank=True, verbose_name='What Characteristics Make A Good Teacher: (200 Words or Less)')
-    abilitiesquestion = models.TextField(max_length=200, blank=True, verbose_name='How Would You Address A Range Of Abilities In Your Classroom: (200 Words or Less)')
+    teachercharacteristics = models.TextField(max_length=1500, blank=True, verbose_name='What Characteristics Make A Good Teacher: (200 Words or Less)')
+    abilitiesquestion = models.TextField(
+        max_length=1500, blank=True, verbose_name='How Would You Address A Range Of Abilities In Your Classroom: (200 Words or Less)')
     availability = models.CharField(max_length=20, choices=AVAILABILITY_CHOICES, blank=True, verbose_name='Choose Your Availability:')
