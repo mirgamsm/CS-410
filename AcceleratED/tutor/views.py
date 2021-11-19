@@ -69,7 +69,7 @@ def profile_view(request):
     User = get_user_model()
     user = User.objects.get(email=request.user.email)
     tutor = Tutor.objects.filter(email=user)
-    return render(request, 'tutor/profile.html', {'authenticated': True, "Tutor": tutor})
+    return render(request, 'tutor/profile.html', {'authenticated': True, "Tutor": tutor, "User": user})
 @login_required(login_url='login')
 def del_account(request):
     User = get_user_model()

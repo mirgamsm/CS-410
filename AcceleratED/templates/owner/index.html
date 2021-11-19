@@ -1,16 +1,86 @@
-<h1>Hello admin</h1>
+{% extends 'tutor/base.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% block title %}
+Edit Profile
+{% endblock %}
+{% block body %}
+
+
+
+
+
+
+    
+    <style>
+        #customers{
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(even){background-color: #f2f2f2;}
+        #customers tr:nth-child(odd){background-color: #dbd8d8;}
+
+        #customers tr:hover {background-color: #ddd;}
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+    </style>
+
 <a href="{% url 'logout' %}" class="btn btn-light">Logout</a>
 
-<h3>All Users</h3>
-{% for user in User %}
-
-<table style="width:100%">
+<table id="customers">
+    <tr>
+        <th>Email</th>
+        <th>Name</th>
+        <th>Phone</th>
+    </tr>
+    {% for user in User %}
     <tr>
         <td>{{user}}</td>
         <td>{{user.tutor.firstname}}</td>
-        <th>
-            Image
-            <img src='/media/{{user.tutor.image}}' width="50" height="50">
-        </th>
+        <td>{{user.tutor.phonenumber}}</td>
     </tr>
 {% endfor %}
+</table>
+
+
+
+
+    <!-- <script>
+        // Get the elements with class="column"
+        var elements = document.getElementsByClassName("column");
+
+        // Declare a loop variable
+        var i;
+
+        // List View
+        function listView() {
+            for (i = 0; i < elements.length; i++) {
+                elements[i].style.width = "100%";
+            }
+        }
+
+        /* Optional: Add active class to the current button (highlight it) */
+        var container = document.getElementById("btnContainer");
+        var btns = container.getElementsByClassName("btn");
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].addEventListener("click", function () {
+                var current = document.getElementsByClassName("active");
+                current[0].className = current[0].className.replace(" active", "");
+                this.className += " active";
+            });
+        }
+    </script> -->
+
+{% endblock %}
