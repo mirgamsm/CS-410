@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import  AuthenticationForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegistrationForm, tutorPersonalform, tutorEduform, tutorWorkform, tutorQAform
+from .forms import UserRegistrationForm, imageUpload, tutorPersonalform, tutorEduform, tutorWorkform, tutorQAform
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from .models import Tutor
@@ -67,7 +67,7 @@ def profile_view(request):
     user = User.objects.get(email=request.user.email)
     tutor = Tutor.objects.filter(email=user)
     return render(request, 'tutor/profile.html', {'authenticated': True, "Tutor": tutor})
-
+@login_required(login_url='login')
 def del_account(request):
     User = get_user_model()
     current =User.objects.get(id=request.user.id)
@@ -86,8 +86,6 @@ def edit_personal_view(request):
     if form.is_valid():
         form.save()
         return redirect('profile')
-    else:
-        form = tutorPersonalform()
     return render(request, 'tutor/personal.html', {'authenticated': True, 'form': form})
     
 @login_required(login_url='login')    
@@ -97,8 +95,6 @@ def edit_edu_view(request):
     if form.is_valid():
         form.save()
         return redirect('profile')
-    else:
-        form = tutorEduform()
     return render(request, 'tutor/edu.html', {'authenticated': True, 'form': form})
 
 
@@ -109,8 +105,6 @@ def edit_work_view(request):
     if form.is_valid():
         form.save()
         return redirect('profile')
-    else:
-        form = tutorWorkform()
     return render(request, 'tutor/work.html', {'authenticated': True, 'form': form})
 
 
@@ -121,6 +115,14 @@ def edit_qa_view(request):
     if form.is_valid():
         form.save()
         return redirect('profile')
-    else:
-        form = tutorQAform()
     return render(request, 'tutor/qa.html', {'authenticated': True, 'form': form})
+
+
+@login_required(login_url='login')
+def imgUpload_view(request):
+    profiles = Tutor.objects.get(email_id=request.user.id)
+    form = imageUpload(request.POST or None, request.FILES or None, instance=profiles)
+    if form.is_valid():
+        form.save()
+        return redirect('profile')
+    return render(request, 'tutor/imgUpload.html', {'authenticated': True, 'form': form})

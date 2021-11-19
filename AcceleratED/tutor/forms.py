@@ -2,6 +2,7 @@ from django import forms
 ####USER PAGE VVVVV
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
+from django.db.models import fields
 
 from tutor.models import Tutor
 
@@ -61,3 +62,9 @@ class tutorQAform(forms.ModelForm):
         fields = (
                 'teachercharacteristics', 'abilitiesquestion', 'availability'
                 )
+class imageUpload(forms.ModelForm):
+    class Meta: 
+        model= Tutor 
+        fields =(
+            'image',
+        )

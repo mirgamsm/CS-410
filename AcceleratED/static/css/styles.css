@@ -11,11 +11,13 @@ body{
 .asteriskField{
     display: none;
 }
-
+.con{
+    display: flex;
+    justify-content: space-evenly;
+}
 form > .alert > ul > li{
     list-style: none;
 }
-
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
     color: #395caa;
     background-color: #e0e0e0;
@@ -25,8 +27,7 @@ form > .alert > ul > li{
 .btn-primary{
     background-color: #395caa;
     border-color: #e0e0e0;
-}
-
+} 
 tr {
     border-bottom: 2px solid #73c543
 }

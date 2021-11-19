@@ -9,11 +9,13 @@ Edit Profile
 <div class="row justify-content-center">
     <div class="col-10">
         <div class="card">
-            <div class="card-body">
+            <div class="card-body con">
               <a href="{% url 'personal' %}" class="btn btn-light">Edit Personal Info</a>
               <a href="{% url 'edu' %}" class="btn btn-light">Edit Education Info</a>
               <a href="{% url 'work' %}" class="btn btn-light">Edit Work Experience Info</a>
               <a href="{% url 'qa' %}" class="btn btn-light">Edit QA section</a>
+              <a href="{% url 'imgUpload' %}" class="btn btn-light">Edit Images</a>
+              <a href="{% url 'delete' %}" class="btn btn-outline-primary del_btn">Delete</a>
             </div>
         </div>
 

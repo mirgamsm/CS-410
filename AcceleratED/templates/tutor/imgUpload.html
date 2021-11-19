@@ -1,0 +1,33 @@
+{% extends 'tutor/base.html' %}
+{% load crispy_forms_filters %}
+
+{% block title %}
+Register
+{% endblock %}
+
+{% block body %}
+
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div class="card">
+            <div class="card-body">
+                
+                <form enctype="multipart/form-data" action="{% url 'imgUpload' %}" method="post" novalidate>
+                    {% csrf_token %}
+                    {{ form }}
+                    <input type="submit" value="Upload" />
+                </form>
+
+                <br><br>
+                <img src='{{ MEDIA_URL }}{{ image }}'>
+                <br><br>
+                </p>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}
