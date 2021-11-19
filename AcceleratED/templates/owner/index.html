@@ -1,0 +1,16 @@
+<h1>Hello admin</h1>
+<a href="{% url 'logout' %}" class="btn btn-light">Logout</a>
+
+<h3>All Users</h3>
+{% for user in User %}
+
+<table style="width:100%">
+    <tr>
+        <td>{{user}}</td>
+        <td>{{user.tutor.firstname}}</td>
+        <th>
+            Image
+            <img src='/media/{{user.tutor.image}}' width="50" height="50">
+        </th>
+    </tr>
+{% endfor %}

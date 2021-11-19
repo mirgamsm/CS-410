@@ -22,9 +22,12 @@ def login_view(request):
         # check whether it's valid:
         if form.is_valid():
             # get the user info from the form data and login the user
+            
             user = form.get_user()
             login(request, user)
             # redirect the user to index page
+            if request.user.is_superuser:
+                return redirect('index')
             return redirect('profile')
     else:
         # Create an empty instance of Django's AuthenticationForm to generate the necessary html on the template.
