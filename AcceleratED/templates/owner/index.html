@@ -6,12 +6,6 @@ Edit Profile
 {% endblock %}
 {% block body %}
 
-
-
-
-
-
-    
     <style>
         #customers{
             font-family: Arial, Helvetica, sans-serif;
@@ -42,16 +36,21 @@ Edit Profile
 <table id="customers">
     <tr>
         <th>Email</th>
-        <th>Name</th>
+        <th>First</th>
+        <th>last</th>
         <th>Phone</th>
     </tr>
     {% for user in User %}
+
     <tr>
-        <td>{{user}}</td>
-        <td>{{user.tutor.firstname}}</td>
-        <td>{{user.tutor.phonenumber}}</td>
+        <a href="{% url 'file' user.id %}">
+            <td><a href="{% url 'file' user.id %}">{{user}}</a></td>
+            <td>{{user.tutor.firstname}}</td>
+            <td>{{user.tutor.lastname}}</td>
+            <td>{{user.tutor.phonenumber}}</td>
+        </a>
     </tr>
-{% endfor %}
+    {% endfor %}
 </table>
 
 

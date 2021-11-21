@@ -11,11 +11,21 @@ def index_view(request):
     if request.user.is_superuser:         
         User = get_user_model()
         user = User.objects.all()
-        tutor = Tutor.objects.filter(email=user)
-        return render(request, 'owner/index.html', {"Tutor": tutor, "User": user})
+        return render(request, 'owner/index.html', { "User": user})
     else: 
         return redirect('login')
 
+
+def del_account(request, id):
+    User = get_user_model()
+    current = User.objects.get(id=id)
+    current.delete()
+    return redirect('index')
+
+def profile_view(request, id):
+    User = get_user_model()
+    user = User.objects.get(id=id)
+    return render(request, 'owner/profile.html', {'authenticated': True, "User": user})
 
 def logout_view(request):
     logout(request)
