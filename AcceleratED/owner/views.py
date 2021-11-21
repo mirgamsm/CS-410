@@ -11,8 +11,12 @@ def index_view(request):
     if request.user.is_superuser:
         User = get_user_model()
         if request.method == "POST":  
-            searched =request.POST['searched']       
-            user = User.objects.filter(email__contains=searched)
+            searched =request.POST['searched'] 
+            by =request.POST['by']
+            search_type = 'contains'
+            filter = by + '__' + search_type
+            user = User.objects.filter(**{filter: searched})
+            # user = User.objects.filter(tutor__firstname= searched)
         else:
             user = User.objects.all()
         return render(request, 'owner/index.html', { "User": user})

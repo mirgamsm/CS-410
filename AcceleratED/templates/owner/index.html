@@ -35,6 +35,10 @@ Edit Profile
 <form method="POST" action="{% url 'index' %}">
     {% csrf_token %}
     <input type="search" placeholder="Search" name="searched">
+    <select name="by" placeholder="email">
+        <option value="email">email</option>
+        <option value="tutor__firstname">first name</option>
+    </select>
     <button class="btn btn-light" type="submit">Search</button>
 
 </form>
