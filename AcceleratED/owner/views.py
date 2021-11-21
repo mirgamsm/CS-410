@@ -8,9 +8,13 @@ from tutor.models import Tutor
 
 
 def index_view(request):
-    if request.user.is_superuser:         
+    if request.user.is_superuser:
         User = get_user_model()
-        user = User.objects.all()
+        if request.method == "POST":  
+            searched =request.POST['searched']       
+            user = User.objects.filter(email__contains=searched)
+        else:
+            user = User.objects.all()
         return render(request, 'owner/index.html', { "User": user})
     else: 
         return redirect('login')

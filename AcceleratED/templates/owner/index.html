@@ -32,6 +32,12 @@ Edit Profile
     </style>
 
 <a href="{% url 'logout' %}" class="btn btn-light">Logout</a>
+<form method="POST" action="{% url 'index' %}">
+    {% csrf_token %}
+    <input type="search" placeholder="Search" name="searched">
+    <button class="btn btn-light" type="submit">Search</button>
+
+</form>
 
 <table id="customers">
     <tr>
@@ -39,15 +45,17 @@ Edit Profile
         <th>First</th>
         <th>last</th>
         <th>Phone</th>
+        <th></th>
     </tr>
     {% for user in User %}
 
     <tr>
         <a href="{% url 'file' user.id %}">
-            <td><a href="{% url 'file' user.id %}">{{user}}</a></td>
+            <td>{{user}}</td>
             <td>{{user.tutor.firstname}}</td>
             <td>{{user.tutor.lastname}}</td>
             <td>{{user.tutor.phonenumber}}</td>
+            <td><a class="btn btn-light" href="{% url 'file' user.id %}">View</a></td>
         </a>
     </tr>
     {% endfor %}
