@@ -1,4 +1,4 @@
-{% extends 'tutor/base.html' %}
+{% extends 'owner/base.html' %}
 {% load crispy_forms_filters %}
 {% block title %}
 My Profile
@@ -6,7 +6,6 @@ My Profile
 {% block body %}
 <div class="container">
     <div class="main-body">
-        <a href="{% url 'delete' User.id %}" class="btn btn-outline-primary del_btn">Delete</a>
         <div class="row gutters-sm">
             <div class="col-md-4 mb-3">
                 <div class="card">
@@ -17,12 +16,13 @@ My Profile
                             <div class="mt-3">
                                 <h4>{{User.tutor.firstname}} {{User.User.tutor.lastname}}</h4>
                                 <p class="text-secondary mb-1">{{User.tutor.phonenumber}}</p>
-                                <p class="text-muted font-size-sm">{{user}}</p>
+                                <p class="text-muted font-size-sm">{{User.tutor.email}}</p>
+                                <a href="{% url 'delete' User.id %}" class="btn btn-outline-primary del_btn">Delete</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="card mt-3">
+                <!-- <div class="card mt-3">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                             <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -80,231 +80,104 @@ My Profile
                             <span class="text-secondary">bootdey</span>
                         </li>
                     </ul>
-                </div>
+                </div>  -->
             </div>
             <div class="col-md-8">
                 <div class="card mb-3">
-                                    <div class="card-body">
-                                        <div class="row">
-                                    <table style="width:100%">
-                                        <tr>
-                                            <th style="width:30%">Name</th>
-                                            <td>{{User.tutor.firstname}} {{User.tutor.lastname}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Birthday</th>
-                                            <td>{{User.tutor.birthday}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Phone Number</th>
-                                            <td>{{User.tutor.phonenumber}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Gender</th>
-                                            <td>{{User.tutor.gender}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Introduction</th>
-                                            <td>{{User.tutor.introduction}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Languages</th>
-                                            <td>{{User.tutor.languages}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Highest Level of Education</th>
-                                            <td>{{User.tutor.education}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Major (If Applicable)</th>
-                                            <td>{{User.tutor.major}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Minor (If Applicable)</th>
-                                            <td>{{User.tutor.minor}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Certified Teacher</th>
-                                            <td>{{User.tutor.experience}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Certified In</th>
-                                            <td>{{User.tutor.statecert}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Phonics Programs</th>
-                                            <td>{{User.tutor.phonicsex}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Employment Status</th>
-                                            <td>{{User.tutor.employment}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Most Recent Job Title</th>
-                                            <td>{{User.tutor.curremployment}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Current Employer</th>
-                                            <td>{{User.tutor.employer}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Employer Address</th>
-                                            <td>{{User.tutor.employeraddress}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th style="width:30%"></th>
-                                            <td>{{User.tutor.employercity}} {{User.tutor.employerstate}} {{User.tutor.employerzip}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Reference</th>
-                                            <td>{{User.tutor.currreference}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Characteristics of a Good Teacher</th>
-                                            <td>{{User.tutor.teachercharacteristics}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>How to Address a Range of Abilities</th>
-                                            <td>{{User.tutor.abilitiesquestion}}</td>
-                                        </tr>
-                                    
-                                    
-                                    </table>
-                                                        </div>
-                                                        </div>
-                                                        </div>
-                                                        </div>
-            <!-- <div class="col-md-8">
-                <div class="card mb-3">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Full Name</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                Kenneth Valdez
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Email</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                fip@jukmuh.al
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Phone</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                (239) 816-9029
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Mobile</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                (320) 380-4539
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Address</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                Bay Area, San Francisco, CA
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <a class="btn btn-info " target="__blank"
-                                    href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row gutters-sm">
-                    <div class="col-sm-6 mb-3">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h6 class="d-flex align-items-center mb-3"><i
-                                        class="material-icons text-info mr-2">assignment</i>Project Status</h6>
-                                <small>Web Design</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 80%"
-                                        aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>Website Markup</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 72%"
-                                        aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>One Page</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 89%"
-                                        aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>Mobile Template</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 55%"
-                                        aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>Backend API</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 66%"
-                                        aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 mb-3">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h6 class="d-flex align-items-center mb-3"><i
-                                        class="material-icons text-info mr-2">assignment</i>Project Status</h6>
-                                <small>Web Design</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 80%"
-                                        aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>Website Markup</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 72%"
-                                        aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>One Page</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 89%"
-                                        aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>Mobile Template</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 55%"
-                                        aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>Backend API</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 66%"
-                                        aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
+                            <h3>Profile Information for {{User.tutor.firstname}} {{User.tutor.lastname}}</h3>
+                        <table style="width:100%">
+                            <tr>
+                                <th style="width:30%">Name</th>
+                                <td>{{User.tutor.firstname}} {{User.tutor.lastname}}</td>
+                            </tr>
+                            <tr>
+                                <th>Birthday</th>
+                                <td>{{User.tutor.birthday}}</td>
+                            </tr>
+                            <tr>
+                                <th>Phone Number</th>
+                                <td>{{User.tutor.phonenumber}}</td>
+                            </tr>
+                            <tr>
+                                <th>Gender</th>
+                                <td>{{User.tutor.gender}}</td>
+                            </tr>
+                            <tr>
+                                <th>Introduction</th>
+                                <td>{{User.tutor.introduction}}</td>
+                            </tr>
+                            <tr>
+                                <th>Languages</th>
+                                <td>{{User.tutor.languages}}</td>
+                            </tr>
+                            <tr>
+                                <th>Highest Level of Education</th>
+                                <td>{{User.tutor.education}}</td>
+                            </tr>
+                            <tr>
+                                <th>Major (If Applicable)</th>
+                                <td>{{User.tutor.major}}</td>
+                            </tr>
+                            <tr>
+                                <th>Minor (If Applicable)</th>
+                                <td>{{User.tutor.minor}}</td>
+                            </tr>
+                            <tr>
+                                <th>Certified Teacher</th>
+                                <td>{{User.tutor.experience}}</td>
+                            </tr>
+                            <tr>
+                                <th>State(s) Certified In</th>
+                                <td>{{User.tutor.statecert}}</td>
+                            </tr>
+                            <tr>
+                                <th>Phonics Programs</th>
+                                <td>{{User.tutor.phonicsex}}</td>
+                            </tr>
+                            <tr>
+                                <th>Employment Status</th>
+                                <td>{{User.tutor.employment}}</td>
+                            </tr>
+                            <tr>
+                                <th>Most Recent Job Title</th>
+                                <td>{{User.tutor.curremployment}}</td>
+                            </tr>
+                            <tr>
+                                <th>Current Employer</th>
+                                <td>{{User.tutor.employer}}</td>
+                            </tr>
+                            <tr>
+                                <th>Employer Address</th>
+                                <td>{{User.tutor.employeraddress}}</td>
+                            </tr>
+                            <tr>
+                                <th>Address Line 2</th>
+                                <td>{{User.tutor.employercity}} {{User.tutor.employerstate}} {{tutor.employerzip}}</td>
+                            </tr>
+                            <tr>
+                                <th>Reference</th>
+                                <td>{{User.tutor.currreference}}</td>
+                            </tr>
+                            <tr>
+                                <th>Characteristics of a Good Teacher</th>
+                                <td>{{User.tutor.teachercharacteristics}}</td>
+                            </tr>
+                            <tr>
+                                <th>How to Address a Range of Abilities</th>
+                                <td>{{User.tutor.abilitiesquestion}}</td>
+                            </tr>
+                            <tr>
+                                <th>Availability</th>
+                                <td>{{User.tutor.availability}}</td>
+                            </tr>
+                            </table>
                         </div>
                     </div>
                 </div>
-
-
-
-            </div> -->
+            </div>
         </div>
-
     </div>
 </div>
 

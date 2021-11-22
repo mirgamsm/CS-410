@@ -142,13 +142,13 @@ class Tutor(models.Model):
     )
     DEGREE_CHOICES = (
         ('None', 'None'),
-        ('CIN', 'Currently Enrolled In College'),
-        ('AS', 'Associate\'s Degree'),
-        ('TECH', 'Technical Certification'),
-        ('BAS', 'Bachelor\'s Degree'),
-        ('MA', 'Master\'s Degree'),
-        ('ED', 'Education Specialist/6th Year/Etc . . .'),
-        ('EDD', 'Doctorate or Higher')
+        ('College Student', 'Currently Enrolled In College'),
+        ('A.A./A.S.', 'Associate\'s Degree'),
+        ('Technical Certification', 'Technical Certification'),
+        ('B.A./B.S.', 'Bachelor\'s Degree'),
+        ('M.A./M.S./M.Ed.', 'Master\'s Degree'),
+        ('Ed.S.', 'Education Specialist/6th Year/Etc . . .'),
+        ('Ed.D./Ph.D.', 'Doctorate or Higher')
     )
     YESNO = (
         ('Yes', 'Yes'),
@@ -157,7 +157,7 @@ class Tutor(models.Model):
     AVAILABILITY_CHOICES = (
         ('AM', 'Part Time AM'),
         ('PM', 'Part Time PM'),
-        ('F', 'Full Time (AM and PM)')
+        ('Full Time', 'Full Time (AM and PM)')
     )
     email = models.OneToOneField(User, on_delete=models.CASCADE)
     firstname = models.CharField(max_length=20, blank=True, verbose_name='First Name')
@@ -181,12 +181,12 @@ class Tutor(models.Model):
     employercity = models.CharField(max_length=30, blank=True, verbose_name='City')
     employerstate = models.CharField(max_length=5, choices=STATE_CHOICES, verbose_name='State', default='None')
     employerzip = models.CharField(max_length=30, blank=True, verbose_name='Zip Code')
-    currreference = models.CharField(max_length=20, blank=True, verbose_name='Supervisor/Reference Contact Information (If Applicable)')
+    currreference = models.CharField(max_length=60, blank=True, verbose_name='Supervisor/Reference Contact Information (If Applicable)')
     teachercharacteristics = models.TextField(max_length=1500, blank=True, verbose_name='What Characteristics Make A Good Teacher: (200 Words or Less)')
     abilitiesquestion = models.TextField(
         max_length=1500, blank=True, verbose_name='How Would You Address A Range Of Abilities In Your Classroom: (200 Words or Less)')
     availability = models.CharField(max_length=20, choices=AVAILABILITY_CHOICES, blank=True, verbose_name='Choose Your Availability:')
-    image =models.ImageField(upload_to='images/', blank=True, null=True, verbose_name="")
+    image = models.ImageField(upload_to='images/', blank=True, null=True, verbose_name="")
 
     def __str__(self):
         return self.firstname

@@ -16,8 +16,6 @@ Edit Profile
                 <form method="post">
                     {% csrf_token %}
 
-                    <div class="row">
-                        <div class="col-6">
                     {{ form.employment|as_crispy_field }}
                     {{ form.curremployment|as_crispy_field }}
                     {{ form.employer|as_crispy_field }}
@@ -31,8 +29,8 @@ Edit Profile
                         </div>
                         <div class="col-4">
                             {{ form.employerzip|as_crispy_field }}
-                          </div>
-                      </div>
+                        </div>
+                    </div>
                     {{ form.currreference|as_crispy_field }}
                     <button type="submit" class="btn btn-outline-primary">Submit</button>
                 </form>

@@ -1,11 +1,23 @@
+html{
+    height: 100%;
+}
+
 body{
-    background-color: #73c543;
+    /* background-color: #73c543; */
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-image: linear-gradient(#a8eb81,#73c543);
     padding-top: 50px;
+    overflow-wrap: break-word;
 }
 
 .card{
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    background-color: #c8df9c;
+    box-shadow: 0 8px 8px 0 #00000040;
+    background-color: #d6eeab;
+    margin-bottom: 20px;
+    overflow-wrap: break-word;
 }
 
 .asteriskField{
@@ -21,7 +33,7 @@ form > .alert > ul > li{
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
     color: #395caa;
     background-color: #e0e0e0;
-    border-color: #395caa; /*set the color you want here*/
+    border-color: #395caa;
 }
 
 .btn-primary{
@@ -29,8 +41,10 @@ form > .alert > ul > li{
     border-color: #e0e0e0;
 } 
 tr {
-    border-bottom: 2px solid #73c543
+    border-bottom: 2px solid #73c543;
 }
 .del_btn{
+    color: #e0e0e0;
     background-color: #f44336;
+    border-color: #e0e0e0;
 }

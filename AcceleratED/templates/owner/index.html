@@ -1,4 +1,4 @@
-{% extends 'tutor/base.html' %}
+{% extends 'owner/base.html' %}
 {% load crispy_forms_filters %}
 {% load crispy_forms_tags %}
 {% block title %}
@@ -17,81 +17,57 @@ Edit Profile
             padding: 8px;
         }
 
-        #customers tr:nth-child(even){background-color: #f2f2f2;}
-        #customers tr:nth-child(odd){background-color: #dbd8d8;}
+        #customers tr:nth-child(even){background-color: #f0ffe7;}
+        #customers tr:nth-child(odd){background-color: #d4ffbb;}
 
-        #customers tr:hover {background-color: #ddd;}
+        #customers tr:hover {background-color: #b0ee8d;}
 
         #customers th {
             padding-top: 12px;
             padding-bottom: 12px;
             text-align: left;
-            background-color: #04AA6D;
+            background-color: #64ad3a;
             color: white;
         }
     </style>
 
-<a href="{% url 'logout' %}" class="btn btn-light">Logout</a>
-<form method="POST" action="{% url 'index' %}">
-    {% csrf_token %}
-    <input type="search" placeholder="Search" name="searched">
-    <select name="by" placeholder="email">
-        <option value="email">email</option>
-        <option value="tutor__firstname">first name</option>
-    </select>
-    <button class="btn btn-light" type="submit">Search</button>
+<div class="row justify-content-center">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <!-- <a href="{% url 'logout' %}" class="btn btn-light">Logout</a> -->
+                <form method="POST" action="{% url 'index' %}">
+                    {% csrf_token %}
+                    <input type="search" placeholder="Search" name="searched">
+                    <select name="by" placeholder="Email">
+                        <option value="email">Email</option>
+                        <option value="tutor__lastname">Last Name</option>
+                    </select>
+                    <button class="btn btn-light" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-</form>
+                <table id="customers">
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th></th>
+                    </tr>
+                    {% for user in User %}
 
-<table id="customers">
-    <tr>
-        <th>Email</th>
-        <th>First</th>
-        <th>last</th>
-        <th>Phone</th>
-        <th></th>
-    </tr>
-    {% for user in User %}
-
-    <tr>
-        <a href="{% url 'file' user.id %}">
-            <td>{{user}}</td>
-            <td>{{user.tutor.firstname}}</td>
-            <td>{{user.tutor.lastname}}</td>
-            <td>{{user.tutor.phonenumber}}</td>
-            <td><a class="btn btn-light" href="{% url 'file' user.id %}">View</a></td>
-        </a>
-    </tr>
-    {% endfor %}
-</table>
-
-
-
-
-    <!-- <script>
-        // Get the elements with class="column"
-        var elements = document.getElementsByClassName("column");
-
-        // Declare a loop variable
-        var i;
-
-        // List View
-        function listView() {
-            for (i = 0; i < elements.length; i++) {
-                elements[i].style.width = "100%";
-            }
-        }
-
-        /* Optional: Add active class to the current button (highlight it) */
-        var container = document.getElementById("btnContainer");
-        var btns = container.getElementsByClassName("btn");
-        for (var i = 0; i < btns.length; i++) {
-            btns[i].addEventListener("click", function () {
-                var current = document.getElementsByClassName("active");
-                current[0].className = current[0].className.replace(" active", "");
-                this.className += " active";
-            });
-        }
-    </script> -->
+                    <tr>
+                        <a href="{% url 'file' user.id %}">
+                            <td>{{user.tutor.firstname}} {{user.tutor.lastname}}</td>
+                            <td><a href="mailto:{{user}}">{{user}}</a></td>
+                            <td>{{user.tutor.phonenumber}}</td>
+                            <td><a class="btn btn-light" href="{% url 'file' user.id %}">View</a></td>
+                        </a>
+                    </tr>
+                    {% endfor %}
+                </table>
 
 {% endblock %}
