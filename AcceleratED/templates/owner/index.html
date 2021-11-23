@@ -45,6 +45,15 @@ Edit Profile
                     </select>
                     <button class="btn btn-light" type="submit">Search</button>
                 </form>
+
+                <form method="POST" action="{% url 'index_order' %}" name="ordered">
+                    {% csrf_token %}
+                    <select name="order" placeholder="Email">
+                        <option value="email">Email</option>
+                        <option value="tutor__lastname">Last Name</option>
+                    </select>
+                    <button class="btn btn-light" type="submit">Order</button>
+                </form>
             </div>
         </div>
     </div>

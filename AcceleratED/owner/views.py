@@ -6,6 +6,17 @@ from tutor.models import Tutor
 # Create your views here.
 
 
+def index_view_order(request):
+    if request.user.is_superuser:
+        User = get_user_model()
+        if request.method == "POST":
+            ordered = request.POST['order']
+            user = User.objects.order_by(ordered)
+        else:
+            user = User.objects.all()
+        return render(request, 'owner/index.html', { "User": user})
+    else: 
+        return redirect('login')
 
 def index_view(request):
     if request.user.is_superuser:
