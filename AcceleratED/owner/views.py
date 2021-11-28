@@ -3,20 +3,23 @@ from django.shortcuts import redirect, render
 
 from tutor.models import Tutor
 
+
+
+
 # Create your views here.
 
 
-def index_view_order(request):
-    if request.user.is_superuser:
-        User = get_user_model()
-        if request.method == "POST":
-            ordered = request.POST['order']
-            user = User.objects.order_by(ordered)
-        else:
-            user = User.objects.all()
-        return render(request, 'owner/index.html', { "User": user})
-    else: 
-        return redirect('login')
+# def index_view_order(request):
+#     if request.user.is_superuser:
+#         User = get_user_model()
+#         if request.method == "POST":
+#             ordered = request.POST['order']
+#             user = User.objects.order_by(ordered)
+#         else:
+#             user = User.objects.all()
+#         return render(request, 'owner/index.html', { "User": user})
+#     else: 
+#         return redirect('login')
 
 def index_view(request):
     if request.user.is_superuser:
@@ -26,8 +29,14 @@ def index_view(request):
             by =request.POST['by']
             search_type = 'contains'
             filter = by + '__' + search_type
-            user = User.objects.filter(**{filter: searched})
-            # user = User.objects.filter(tutor__firstname= searched)
+            ordered = request.POST['order']
+            print("this is a line")
+            print(request.POST.getlist('px'))
+            px = request.POST.getlist('px')
+            user = User.objects.filter(
+                **{filter: searched}).order_by(ordered).filter(tutor__phonicsex__contains=', '.join(px))
+            # user = User.objects.filter(tutor__phonicsex__contains= 'Lalilo')
+
         else:
             user = User.objects.all()
         return render(request, 'owner/index.html', { "User": user})
