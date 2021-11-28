@@ -33,8 +33,15 @@ def index_view(request):
             print("this is a line")
             print(request.POST.getlist('px'))
             px = request.POST.getlist('px')
+            print(', '.join(px))
             user = User.objects.filter(
-                **{filter: searched}).order_by(ordered).filter(tutor__phonicsex__contains=', '.join(px))
+                **{filter: searched}).order_by(ordered)
+            for p in px:
+                user =user.filter(tutor__phonicsex__contains=p)
+            # user = User.objects.filter(
+                # **{filter: searched}).order_by(ordered).filter(tutor__phonicsex__contains=','.join(px))
+            # user = User.objects.filter(
+                # **{filter: searched}).order_by(ordered).filter(tutor__phonicsex__contains='Fundations,Fountas & Pinnell Literacy')
             # user = User.objects.filter(tutor__phonicsex__contains= 'Lalilo')
 
         else:
