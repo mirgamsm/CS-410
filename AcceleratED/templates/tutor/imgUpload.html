@@ -2,16 +2,16 @@
 {% load crispy_forms_filters %}
 
 {% block title %}
-Register
+Upload Images
 {% endblock %}
 
 {% block body %}
 
 <div class="row justify-content-center">
-    <div class="col-8">
+    <div class="col-10">
         <div class="card">
             <div class="card-body">
-                
+                <h3>Upload Image of Teaching Certification</h3>
                 <form enctype="multipart/form-data" action="{% url 'imgUpload' %}" method="post" novalidate>
                     {% csrf_token %}
                     {{ form }}

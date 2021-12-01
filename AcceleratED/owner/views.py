@@ -3,24 +3,6 @@ from django.shortcuts import redirect, render
 
 from tutor.models import Tutor
 
-
-
-
-# Create your views here.
-
-
-# def index_view_order(request):
-#     if request.user.is_superuser:
-#         User = get_user_model()
-#         if request.method == "POST":
-#             ordered = request.POST['order']
-#             user = User.objects.order_by(ordered)
-#         else:
-#             user = User.objects.all()
-#         return render(request, 'owner/index.html', { "User": user})
-#     else: 
-#         return redirect('login')
-
 def index_view(request):
     if request.user.is_superuser:
         User = get_user_model()
@@ -30,19 +12,20 @@ def index_view(request):
             search_type = 'contains'
             filter = by + '__' + search_type
             ordered = request.POST['order']
-            print("this is a line")
-            print(request.POST.getlist('px'))
+            avail = request.POST.getlist('avail')
+            cert = request.POST.getlist('cert')
             px = request.POST.getlist('px')
-            print(', '.join(px))
+            edu = request.POST.getlist('edu')
             user = User.objects.filter(
                 **{filter: searched}).order_by(ordered)
+            for a in avail:
+                user =user.filter(tutor__availability__contains=a)
+            for c in cert:
+                user =user.filter(tutor__experience__contains=c)
             for p in px:
                 user =user.filter(tutor__phonicsex__contains=p)
-            # user = User.objects.filter(
-                # **{filter: searched}).order_by(ordered).filter(tutor__phonicsex__contains=','.join(px))
-            # user = User.objects.filter(
-                # **{filter: searched}).order_by(ordered).filter(tutor__phonicsex__contains='Fundations,Fountas & Pinnell Literacy')
-            # user = User.objects.filter(tutor__phonicsex__contains= 'Lalilo')
+            for e in edu:
+                user =user.filter(tutor__education__contains=e)
 
         else:
             user = User.objects.all()

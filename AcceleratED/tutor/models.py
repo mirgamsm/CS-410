@@ -148,7 +148,7 @@ class Tutor(models.Model):
         ('B.A./B.S.', 'Bachelor\'s Degree'),
         ('M.A./M.S./M.Ed.', 'Master\'s Degree'),
         ('Ed.S.', 'Education Specialist/6th Year/Etc . . .'),
-        ('Ed.D./Ph.D.', 'Doctorate or Higher')
+        ('Ed.D./Ph.D.', 'Doctorate')
     )
     YESNO = (
         ('Yes', 'Yes'),
@@ -167,8 +167,8 @@ class Tutor(models.Model):
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES, blank=True, default='None')
     introduction = models.TextField(max_length=1500, blank=True, verbose_name='Introduction (Describe Yourself in 200 Words or Less)')
     languages = MultiSelectField(choices=LANGUAGE_CHOICES, blank=True, default="None", verbose_name='Languages Spoken Fluently')
-    education = models.CharField(max_length=60, choices=DEGREE_CHOICES, blank=True, default='None',
-    verbose_name='Highest Level of Education')
+    education = MultiSelectField(choices=DEGREE_CHOICES, blank=True,
+    verbose_name='Level of Education (Please Select All That Apply):')
     major = models.CharField(max_length=20, blank=True, verbose_name='Major (If Applicable)')
     minor = models.CharField(max_length=20, blank=True, verbose_name='Minor (If Applicable)')
     experience = models.CharField(max_length=4, choices=YESNO, blank=True, verbose_name='Are You A Certified Teacher?')

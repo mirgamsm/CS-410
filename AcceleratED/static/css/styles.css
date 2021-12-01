@@ -30,6 +30,11 @@ body{
 form > .alert > ul > li{
     list-style: none;
 }
+
+.btn{
+    margin: 2px;
+}
+
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
     color: #395caa;
     background-color: #e0e0e0;
@@ -39,7 +44,9 @@ form > .alert > ul > li{
 .btn-primary{
     background-color: #395caa;
     border-color: #e0e0e0;
-} 
+    margin: 5px;
+}
+
 tr {
     border-bottom: 2px solid #73c543;
 }
@@ -47,4 +54,16 @@ tr {
     color: #e0e0e0;
     background-color: #f44336;
     border-color: #e0e0e0;
+    margin: 5px;
 }
+.del_btn:hover{
+    background-color: #ff1302;
+    color: #e0e0e0;
+    border-color: #e0e0e0;
+}
+
+.checkbox-grid li {
+    display: block;
+    float: left;
+    width: 25%;
+  }

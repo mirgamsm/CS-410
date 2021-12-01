@@ -2,7 +2,7 @@
 {% load crispy_forms_filters %}
 {% load crispy_forms_tags %}
 {% block title %}
-Edit Profile
+Admin Index
 {% endblock %}
 {% block body %}
 
@@ -51,84 +51,139 @@ Edit Profile
                     <select name="by" placeholder="Email" aria-label="Search By">
                         <option value="email">Email</option>
                         <option value="tutor__lastname">Last Name</option>
+                        <option value="tutor__languages">Languages</option>
+                        <option value="tutor__major">Degree</option>
+                        <!-- Must search by abbreviation of state -->
+                        <option value="tutor__statecert">State Certification</option>
+                        <option value="tutor__curremployment">Current Job Title</option>
+                        <option value="tutor__phonicsex">Phonics Program</option>
+                        <option value="tutor__availability">Availability</option>
                     </select>
                     <label>Order By</label>
                     <select name="order" placeholder="Email" aria-label="Order By">
                         <option value="email">Email</option>
                         <option value="tutor__lastname">Last Name</option>
+                        <option value="tutor__statecert">State Certification</option>
                     </select>
-                    <label>Must Have:</label><br>
+                    <br><label>When searching by state certification, enter the two-character state abbreviation.</label>
+                    
+                    <br><label>Filter By:</label><br>
+
             <div class= checkboxs>
+                
                     <fieldset class="checkboxs1">
                         
                     <div class ="checkbox">
-                        <input name="px" type="checkbox" id="cer" value="Fundations">
-                        <label for="Fundations">Fundations</label>   
+                        <input name="cert" type="checkbox" id="cer" value="Yes">
+                        <label for="Yes"> Teaching Certification</label>
                     </div>
                     <div class ="checkbox">
-                        <input name="px" type="checkbox" id="cer" value="Fountas & Pinnell Literacy">
-                        <label for="vehicle1">Fountas & Pinnell Literacy</label>
+                        <input name="avail" type="checkbox" value="AM">
+                        <label for="AM"> Part Time AM</label>
                     </div>
                     <div class ="checkbox">
-                        <input name="px" type="checkbox" id="cer" value="Lucy Calkins Units Of Study For Teaching Phonics">
-                        <label for="vehicle1">Lucy Calkins Units Of Study For Teaching Phonics</label>
+                        <input name="avail" type="checkbox" value="PM">
+                        <label for="PM"> Part Time PM</label>
                     </div>
                     <div class ="checkbox">
-                        <input name="px" type="checkbox" id="cer" value="Bridge The Gap Intervention">
-                        <label for="vehicle1">Bridge The Gap Intervention</label>
+                        <input name="avail" type="checkbox" value="F">
+                        <label for="F"> Full Time</label>
                     </div>
                     <div class ="checkbox">
-                        <input name="px" type="checkbox" id="cer" value="Words Their Way">
-                        <label for="vehicle1">Words Their Way</label>
-                    </div>
-                </fieldset>
-                    <fieldset class="checkboxs2">
-                    <div class ="checkbox">
-                        <input name="px" type="checkbox" id="cer" value="Lalilo">
-                        <label for="vehicle1">Lalilo</label>
+                        <input name="edu" type="checkbox" value="Student">
+                        <label for="Student"> College Student</label>
                     </div>
                     <div class ="checkbox">
-                        <input name="px" type="checkbox" id="cer" value="The Heggerty Curriculum">
-                        <label for="vehicle1">The Heggerty Curriculum</label>
+                        <input name="edu" type="checkbox" value="B">
+                        <label for="B"> Bachelor's Degree</label>
                     </div>
                     <div class ="checkbox">
-                        <input name="px" type="checkbox" id="cer" value="Orton Gillingham Approach">
-                        <label for="vehicle1">Orton Gillingham Approach</label>
+                        <input name="edu" type="checkbox" value="M.">
+                        <label for="M."> Master's Degree</label>
                     </div>
                     <div class ="checkbox">
-                        <input name="px" type="checkbox" id="cer" value="Phonics First">
-                        <label for="vehicle1">Phonics First</label>
+                        <input name="edu" type="checkbox" value="Ed.">
+                        <label for="Ed."> Education Specialist/6th Year/Etc</label>
                     </div>
                     <div class ="checkbox">
-                        <input name="px" type="checkbox" id="cer" value="Other">
-                        <label for="vehicle1">Other</label>
+                        <input name="edu" type="checkbox" value="Ph.">
+                        <label for="Ph."> Doctorate</label>
                     </div>
                     </fieldset>
-                </div>
+
+                    <fieldset class="checkboxs2">
+                        <div class ="checkbox">
+                            <input name="px" type="checkbox" id="cer" value="Fundations">
+                            <label for="Fundations">Fundations</label>   
+                        </div>
+                        <div class ="checkbox">
+                            <input name="px" type="checkbox" id="cer" value="Fountas & Pinnell Literacy">
+                            <label for="v">Fountas & Pinnell Literacy</label>
+                        </div>
+                        <div class ="checkbox">
+                            <input name="px" type="checkbox" id="cer" value="Lucy Calkins Units Of Study For Teaching Phonics">
+                            <label for="v">Lucy Calkins</label>
+                        </div>
+                        <div class ="checkbox">
+                            <input name="px" type="checkbox" id="cer" value="Bridge The Gap Intervention">
+                            <label for="v">Bridge The Gap Intervention</label>
+                        </div>
+                        <div class ="checkbox">
+                            <input name="px" type="checkbox" id="cer" value="Words Their Way">
+                            <label for="v">Words Their Way</label>
+                        </div>
+                        <div class ="checkbox">
+                            <input name="px" type="checkbox" id="cer" value="Lalilo">
+                            <label for="v">Lalilo</label>
+                        </div>
+                        <div class ="checkbox">
+                            <input name="px" type="checkbox" id="cer" value="The Heggerty Curriculum">
+                            <label for="v">The Heggerty Curriculum</label>
+                        </div>
+                        <div class ="checkbox">
+                            <input name="px" type="checkbox" id="cer" value="Orton Gillingham Approach">
+                            <label for="v">Orton Gillingham Approach</label>
+                        </div>
+                        <div class ="checkbox">
+                            <input name="px" type="checkbox" id="cer" value="Phonics First">
+                            <label for="v">Phonics First</label>
+                        </div>
+                        <div class ="checkbox">
+                            <input name="px" type="checkbox" id="cer" value="Other">
+                            <label for="v">Other Phonics Program</label>
+                        </div>
+                    </fieldset>
+                
                     <button class="btn btn-light" type="submit">Search</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
-                <table id="customers">
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th></th>
-                    </tr>
-                    {% for user in User %}
 
-                    <tr>
-                        <a href="{% url 'file' user.id %}">
-                            <td>{{user.tutor.firstname}} {{user.tutor.lastname}}</td>
-                            <td><a href="mailto:{{user}}">{{user}}</a></td>
-                            <td>{{user.tutor.phonenumber}}</td>
-                            <td><a class="btn btn-light" href="{% url 'file' user.id %}">View</a></td>
-                        </a>
-                    </tr>
-                    {% endfor %}
-                </table>
+<table id="customers">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Education</th>
+        <th>Certification</th>
+        <th>Actions</th>
+    </tr>
+    {% for user in User %}
+
+    <tr>
+        <a href="{% url 'file' user.id %}">
+            <!-- <td><a class="btn btn-light" href="{% url 'file' user.id %}">{{user.tutor.firstname}} {{user.tutor.lastname}}</a></td> -->
+            <td>{{user.tutor.firstname}} {{user.tutor.lastname}}</td>
+            <td><a href="mailto:{{user}}">{{user}}</a></td>
+            <td>{{user.tutor.phonenumber}}</td>
+            <td>{{user.tutor.education}}</td>
+            <td>{{user.tutor.statecert}}</td>
+            <td><a class="btn btn-light" href="{% url 'file' user.id %}">View</a></td> 
+        </a>
+    </tr>
+    {% endfor %}
+</table>
 
 {% endblock %}
