@@ -138,7 +138,6 @@ class Tutor(models.Model):
         ('Other', 'Other')
     )
     DEGREE_CHOICES = (
-        ('None', 'None'),
         ('College Student', 'Currently Enrolled In College'),
         ('A.A./A.S.', 'Associate\'s Degree'),
         ('Technical Certification', 'Technical Certification'),
