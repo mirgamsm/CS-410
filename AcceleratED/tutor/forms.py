@@ -3,6 +3,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 from django.db.models import fields
+from django.contrib.auth.forms import PasswordResetForm
 
 from tutor.models import Tutor
 
