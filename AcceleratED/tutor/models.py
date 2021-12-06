@@ -62,7 +62,7 @@ class Tutor(models.Model):
         ('The Heggerty Curriculum', 'The Heggerty Curriculum'),
         ('Orton Gillingham Approach', 'Orton Gillingham Approach'),
         ('Phonics First', 'Phonics First'),
-        ('Other', 'Other')
+        ('Other:', 'Other:')
     )
     EMPLOYMENT_CHOICES = (
         ('Full Time', 'Full Time'),
@@ -129,16 +129,13 @@ class Tutor(models.Model):
     )
     LANGUAGE_CHOICES = (
         ('English', 'English'),
-        ('Spanish', 'Spanish'),
-        ('Chinese', 'Chinese'),
-        ('Other', 'Other'),
+        ('Spanish', 'Spanish')
     )
     GENDER_CHOICES = (
         ('Male', 'Male'),
         ('Female', 'Female'),
         ('Non-Binary', 'Non-Binary'),
         ('Other', 'Other')
-
     )
     DEGREE_CHOICES = (
         ('None', 'None'),
@@ -174,6 +171,7 @@ class Tutor(models.Model):
     experience = models.CharField(max_length=4, choices=YESNO, blank=True, verbose_name='Are You A Certified Teacher?')
     statecert = models.CharField(max_length=5, choices=STATE_CHOICES, verbose_name='Please Choose The State In Which You are Certified:', default='None')
     phonicsex = MultiSelectField(choices=PHONICS_CHOICES, blank=True, verbose_name='Choose Any Phonics Programs You Have Experience With:')
+    otherphonics = models.TextField(max_length=500, blank=True, verbose_name='If You Selected "Other," List Other Phonics Programs Here:')
     employment = models.CharField(max_length=20, choices=EMPLOYMENT_CHOICES, blank=True, verbose_name='Employment Status')
     curremployment = models.CharField(max_length=30, blank=True, verbose_name='Current or Most Recent Job Title (If Applicable)')
     employer = models.CharField(max_length=30, blank=True, verbose_name='Employer (If Applicable)')

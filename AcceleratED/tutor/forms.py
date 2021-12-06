@@ -6,8 +6,6 @@ from django.db.models import fields
 
 from tutor.models import Tutor
 
-
-
 class UserRegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True, label='Email')
 
@@ -17,21 +15,7 @@ class UserRegistrationForm(UserCreationForm):
 
 
 class DateInput(forms.DateInput):
-    input_type = 'date'
-
-# class tutorIntakeform(forms.ModelForm):
-#     class Meta:
-#         model =Tutor
-#         fields = ('firstname', 'lastname', 'birthday', 'phonenumber', 'gender',
-#                 'introduction', 'languages','education', 'major',
-#                 'minor', 'experience', 'statecert', 'phonicsex', 'employment',
-#                 'curremployment', 'employer',
-#                 'employeraddress', 'employercity', 'employerstate', 'employerzip',
-#                 'currreference',
-#                 'teachercharacteristics', 'abilitiesquestion', 'availability'
-#                 )
-#         widgets = { 'birthday' : DateInput()}
-        
+    input_type = 'date'       
 
 class tutorPersonalform(forms.ModelForm):
     class Meta:
@@ -45,8 +29,8 @@ class tutorEduform(forms.ModelForm):
     class Meta:
         model =Tutor
         fields = ('education', 'major',
-                'minor', 'experience', 'statecert', 'phonicsex', )
-
+                'minor', 'experience', 'statecert', 'phonicsex', 'otherphonics'
+                )
 
 class tutorWorkform(forms.ModelForm):
     class Meta:
