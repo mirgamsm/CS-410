@@ -23,7 +23,7 @@ My Profile
                                 <a href="{% url 'work' %}" class="btn btn-light">Edit Work</a>
                                 <a href="{% url 'qa' %}" class="btn btn-light">Edit Questionnaire</a>
                                 <a href="{% url 'imgUpload' %}" class="btn btn-light">Upload Documents</a><br>
-                                <a href="{% url 'delete' %}" class="btn btn-outline-primary del_btn">
+                                <a href="{% url 'delete' %}" class="btn btn-outline-primary del_btn" onclick="return confirm('Are you sure you want to delete your Profile?');" >
                                     Delete Profile</a>
                             </div>
                         </div>

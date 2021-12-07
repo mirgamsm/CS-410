@@ -18,7 +18,7 @@ Tutor Profile
                                 <p class="text-muted font-size-sm">{{User.tutor.email}}</p>
                                 <p class="text-muted font-size-sm">{{User.tutor.phonenumber}}</p>
                                 <a href="{% url 'delete' User.id %}"
-                                    class="btn btn-outline-primary del_btn">Delete Profile</a>
+                                    class="btn btn-outline-primary del_btn" onclick="return confirm('Are you sure you want to delete this profile?');">Delete Profile</a>
                             </div>
                         </div>
                     </div>

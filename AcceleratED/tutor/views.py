@@ -7,15 +7,18 @@ from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from .models import Tutor
 from django.shortcuts import render, redirect
-from django.core.mail import send_mail, BadHeaderError
+from django.core.mail import message, send_mail, BadHeaderError
 from django.http import HttpResponse
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.models import User
 from django.template.loader import render_to_string
 from django.db.models.query_utils import Q
-from django.utils.http import urlsafe_base64_encode
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
-from django.utils.encoding import force_bytes
+from django.utils.encoding import force_bytes, force_text
+from django.contrib.sites.shortcuts import get_current_site
+from django.contrib import messages
+
 
 # Create your views here.
 
@@ -31,7 +34,6 @@ def login_view(request):
         # check whether it's valid:
         if form.is_valid():
             # get the user info from the form data and login the user
-            
             user = form.get_user()
             login(request, user)
             # redirect the user to index page
@@ -47,25 +49,42 @@ def login_view(request):
 def register_view(request):
     # This function renders the registration form page and create a new user based on the form data
     if request.method == 'POST':
-        # We use Django's UserCreationForm which is a model created by Django to create a new user.
-        # UserCreationForm has three fields by default: username (from the user model), password1, and password2.
-        # If you want to include email as well, switch to our own custom form called UserRegistrationForm
         form = UserRegistrationForm(request.POST)
         # check whether it's valid: for example it verifies that password1 and password2 match
         if form.is_valid():
-            form.save()
-            # User = get_user_model()
-            # new_Tutor = Tutor(email=User)
-            # new_Tutor.save()
-            # if you want to login the user directly after saving, use the following two lines instead, and redirect to index
-            # user = form.save()
-            # login(user)
-            # redirect the user to login page so that after registration the user can enter the credentials
-            return redirect('login')
+            newUser =form.save(commit=False)
+            newUser.is_active =False
+            newUser.save()
+            mail_subject ='Activate your account'
+            message = render_to_string('tutor/password/activate.html', {
+                'user':newUser,
+                'domain': get_current_site(request).domain,
+                "uid": urlsafe_base64_encode(force_bytes(newUser.pk)),
+                'token': default_token_generator.make_token(newUser),
+                'protocol': 'http',
+            })
+            send_mail(mail_subject, message, 'admin@example.com', [newUser.email], fail_silently=False)
+            
+            return HttpResponse('Check your email and follow the link to activate your account')
     else:
-        # Create an empty instance of Django's UserCreationForm to generate the necessary html on the template.
+        # Create an empty instance of UserRegistrationForm to generate the necessary html on the template.
         form = UserRegistrationForm()
     return render(request, 'tutor/register.html', {'form': form})  
+
+
+def activate(request, uidb64, token):
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+    if user is not None and default_token_generator.check_token(user, token):
+        user.is_active = True
+        user.save()
+        login(request, user)
+        return redirect('profile')
+    else:
+        return HttpResponse('Activation link is invalid!')
 
 def password_reset_request(request):
 	if request.method == "POST":
@@ -79,7 +98,7 @@ def password_reset_request(request):
 					email_template_name = "tutor/password/password_reset_email.txt"
 					c = {
 					"email":user.email,
-					'domain':'127.0.0.1:8000',
+                    'domain': get_current_site(request).domain,
 					'site_name': 'Website',
 					"uid": urlsafe_base64_encode(force_bytes(user.pk)),
 					"user": user,

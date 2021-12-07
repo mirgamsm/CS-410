@@ -1,6 +1,7 @@
 # This is the url path for the Tutor app, 
 # All the the urls specified in this file will be accessible to the users/tutors 
 from . import views
+from django.conf.urls import url
 from django.urls import path
 from django.contrib.auth.views import PasswordResetView
 from django.contrib.auth.views import PasswordResetConfirmView
@@ -8,6 +9,7 @@ from django.contrib.auth.views import PasswordResetDoneView
 from django.contrib.auth.views import PasswordResetCompleteView
 
 urlpatterns = [
+    path('activate/<uidb64>/<token>/', views.activate, name='activate'),
     path('register/', views.register_view, name='register'),
     path('password_reset/done/', PasswordResetDoneView.as_view(template_name='tutor/password/password_reset_done.html'), name='password_reset_done'),
     path('password_reset/<uidb64>/<token>/', PasswordResetConfirmView.as_view(template_name="tutor/password/password_reset_confirm.html"), name='password_reset_confirm'),
