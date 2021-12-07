@@ -37,6 +37,8 @@ def index_view(request):
 def del_account(request, id):
     User = get_user_model()
     current = User.objects.get(id=id)
+    current.tutor.resume.delete()
+    current.tutor.image.delete()
     current.delete()
     return redirect('index')
 

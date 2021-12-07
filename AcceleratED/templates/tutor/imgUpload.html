@@ -11,16 +11,14 @@ Upload Images
     <div class="col-10">
         <div class="card">
             <div class="card-body">
-                <h3>Upload Image of Teaching Certification</h3>
                 <form enctype="multipart/form-data" action="{% url 'imgUpload' %}" method="post" novalidate>
                     {% csrf_token %}
-                    {{ form }}
-                    <input type="submit" value="Upload" />
+                    <h4>Choose an Image of your Teaching Certificate</h4>
+                    {{ form.image }}
+                    <h4>Choose your resume file</h4>
+                    {{ form.resume }}
+                    <input style="background-color: green;" type="submit" value="Upload" />
                 </form>
-
-                <br>
-                
-                </p>
 
             </div>
         </div>

@@ -129,6 +129,8 @@ def profile_view(request):
 def del_account(request):
     User = get_user_model()
     current =User.objects.get(id=request.user.id)
+    current.tutor.resume.delete()
+    current.tutor.image.delete()
     current.delete()
     return redirect('login')
 

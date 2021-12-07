@@ -184,6 +184,7 @@ class Tutor(models.Model):
         max_length=1500, blank=True, verbose_name='How Would You Address A Range Of Abilities In Your Classroom: (200 Words or Less)')
     availability = models.CharField(max_length=20, choices=AVAILABILITY_CHOICES, blank=True, verbose_name='Choose Your Availability:')
     image = models.ImageField(upload_to='images/', blank=True, null=True, verbose_name="")
+    resume = models.FileField(upload_to='files/', blank=True, null=True, verbose_name="")
 
     def __str__(self):
         return self.firstname
