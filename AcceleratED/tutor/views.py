@@ -19,9 +19,6 @@ from django.utils.encoding import force_bytes, force_text
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib import messages
 
-
-# Create your views here.
-
 User = get_user_model()
 
 def login_view(request):
@@ -44,7 +41,6 @@ def login_view(request):
         # Create an empty instance of Django's AuthenticationForm to generate the necessary html on the template.
         form = AuthenticationForm()
     return render(request, 'tutor/index.html', {'form': form})
-
 
 def register_view(request):
     # This function renders the registration form page and create a new user based on the form data
@@ -71,6 +67,8 @@ def register_view(request):
         form = UserRegistrationForm()
     return render(request, 'tutor/register.html', {'form': form})  
 
+def useragreement_view(request):
+    return render(request, 'tutor/useragreement.html')
 
 def activate(request, uidb64, token):
     try:
@@ -115,16 +113,12 @@ def password_reset_request(request):
 	return render(request=request, template_name="tutor/password/password_reset.html", context={"password_reset_form":password_reset_form})
 
 @login_required(login_url='login')
-def edit_view(request):
-    return render(request, 'tutor/edit.html', {'authenticated': True})
-
-
-@login_required(login_url='login')
 def profile_view(request):
     User = get_user_model()
     user = User.objects.get(email=request.user.email)
     tutor = Tutor.objects.filter(email=user)
     return render(request, 'tutor/profile.html', {'authenticated': True, "Tutor": tutor, "User": user})
+
 @login_required(login_url='login')
 def del_account(request):
     User = get_user_model()
@@ -137,7 +131,6 @@ def del_account(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
-
 
 @login_required(login_url='login')
 def edit_personal_view(request):
@@ -157,7 +150,6 @@ def edit_edu_view(request):
         return redirect('profile')
     return render(request, 'tutor/edu.html', {'authenticated': True, 'form': form})
 
-
 @login_required(login_url='login')
 def edit_work_view(request):
     profiles = Tutor.objects.get(email_id=request.user.id)
@@ -167,7 +159,6 @@ def edit_work_view(request):
         return redirect('profile')
     return render(request, 'tutor/work.html', {'authenticated': True, 'form': form})
 
-
 @login_required(login_url='login')
 def edit_qa_view(request):
     profiles = Tutor.objects.get(email_id=request.user.id)
@@ -176,7 +167,6 @@ def edit_qa_view(request):
         form.save()
         return redirect('profile')
     return render(request, 'tutor/qa.html', {'authenticated': True, 'form': form})
-
 
 @login_required(login_url='login')
 def imgUpload_view(request):

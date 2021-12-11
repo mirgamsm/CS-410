@@ -12,16 +12,17 @@ Register
         <div class="card">
             <div class="card-body">
                 <h1>Register</h1>
-                <form action="{% url 'register' %}" method="post" novalidate>
+                <form action="{% url 'register' %}" method="post">
                     {% csrf_token %}
                     {{ form|crispy }}
+                    <p><input type="checkbox" name="terms" required>
+                        <label for="field_terms">I have read and I agree to the 
+                            <a href="{% url 'useragreement' %}">User Agreement</a>.</label></p>
                     <button type="submit" class="btn btn-outline-primary">Register</button>
                     <a href="{% url 'login' %}" type="submit" class="btn btn-outline-primary">Already have an account</a>
                 </form>
-                
             </div>
         </div>
-
     </div>
 </div>
 

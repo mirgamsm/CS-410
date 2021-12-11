@@ -3,7 +3,6 @@ html{
 }
 
 body{
-    /* background-color: #73c543; */
     height: 100%;
     margin: 0;
     background-repeat: no-repeat;
@@ -11,6 +10,7 @@ body{
     background-image: linear-gradient(#a8eb81,#73c543);
     padding-top: 50px;
     overflow-wrap: break-word;
+    width: 100vw;
 }
 
 .card{

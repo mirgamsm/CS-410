@@ -15,7 +15,6 @@ urlpatterns = [
     path('password_reset/<uidb64>/<token>/', PasswordResetConfirmView.as_view(template_name="tutor/password/password_reset_confirm.html"), name='password_reset_confirm'),
     path('reset/done/', PasswordResetCompleteView.as_view(template_name='tutor/password/password_reset_complete.html'), name='password_reset_complete'),
     path("password_reset/", views.password_reset_request, name="password_reset"),
-    path('edit/', views.edit_view, name='edit'),
     path('edit/personal', views.edit_personal_view, name='personal'),
     path('edit/edu', views.edit_edu_view, name='edu'),
     path('edit/work', views.edit_work_view, name='work'),
@@ -24,4 +23,5 @@ urlpatterns = [
     path('delete/', views.del_account, name='delete'),
     path('logout/', views.logout_view, name='logout'),
     path('edit/imgUpload/', views.imgUpload_view, name='imgUpload'),
+    path('useragreement/', views.useragreement_view, name='useragreement'),
 ]

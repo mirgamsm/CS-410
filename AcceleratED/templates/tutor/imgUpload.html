@@ -2,7 +2,7 @@
 {% load crispy_forms_filters %}
 
 {% block title %}
-Upload Images
+Upload Documents
 {% endblock %}
 
 {% block body %}
@@ -11,13 +11,14 @@ Upload Images
     <div class="col-10">
         <div class="card">
             <div class="card-body">
+                <h2>Upload Documents</h2><br>
                 <form enctype="multipart/form-data" action="{% url 'imgUpload' %}" method="post" novalidate>
                     {% csrf_token %}
                     <h4>Choose an Image of your Teaching Certificate</h4>
                     {{ form.image }}
-                    <h4>Choose your resume file</h4>
+                    <br><br><h4>Choose your Resume File</h4>
                     {{ form.resume }}
-                    <input style="background-color: green;" type="submit" value="Upload" />
+                    <input style="background-color: #73c543;" type="submit" value="Upload" />
                 </form>
 
             </div>

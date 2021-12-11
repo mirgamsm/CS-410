@@ -1,5 +1,4 @@
 from django import forms
-####USER PAGE VVVVV
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 from django.db.models import fields

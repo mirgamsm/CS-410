@@ -146,4 +146,5 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'no.reply.accelerated.learning@gmail.com'
+# If you change the password for this email address, be sure to enter the new password here
 EMAIL_HOST_PASSWORD = 'SK9v.iKGm6iM@dD'

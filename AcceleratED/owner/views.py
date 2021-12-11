@@ -18,6 +18,7 @@ def index_view(request):
             edu = request.POST.getlist('edu')
             user = User.objects.filter(
                 **{filter: searched}).order_by(ordered)
+            # Filter options for availability, certification, phonics, and education
             for a in avail:
                 user =user.filter(tutor__availability__contains=a)
             for c in cert:
