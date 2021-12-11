@@ -1,3 +1,5 @@
+<!-- Admin main page with list of tutor accounts -->
+
 {% extends 'owner/base.html' %}
 {% load crispy_forms_filters %}
 {% load crispy_forms_tags %}
@@ -6,46 +8,49 @@ Admin Index
 {% endblock %}
 {% block body %}
 
-    <style>
-        #customers{
-            font-family: Arial, Helvetica, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-        }
-        #customers td, #customers th {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
+<!-- Formatting for tutor accounts table -->
+<style>
+    #customers{
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        margin-bottom: 30px;
+    }
+    #customers td, #customers th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
 
-        #customers tr:nth-child(even){background-color: #f0ffe7;}
-        #customers tr:nth-child(odd){background-color: #d4ffbb;}
+    #customers tr:nth-child(even){background-color: #f0ffe7;}
+    #customers tr:nth-child(odd){background-color: #d4ffbb;}
 
-        #customers tr:hover {background-color: #b0ee8d;}
+    #customers tr:hover {background-color: #b0ee8d;}
 
-        #customers th {
-            padding-top: 12px;
-            padding-bottom: 12px;
-            text-align: left;
-            background-color: #64ad3a;
-            color: white;
-        }
-        .checkboxs1{
-            float: left;
-            width: 50%;
-        }
-        .checkboxs2{
-            float: left;
-            width: 50%;
-        }
-    </style>
+    #customers th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #64ad3a;
+        color: white;
+    }
+    .checkboxs1{
+        float: left;
+        width: 50%;
+    }
+    .checkboxs2{
+        float: left;
+        width: 50%;
+    }
+</style>
 
 <div class="row justify-content-center">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <!-- <a href="{% url 'logout' %}" class="btn btn-light">Logout</a> -->
                 <form method="POST" action="{% url 'index' %}">
                     {% csrf_token %}
+
+                    <!-- Search options -->
                     <input type="search" placeholder="Search" name="searched">
                     <label>Search By</label>
                     <select name="by" placeholder="Email" aria-label="Search By">
@@ -59,6 +64,8 @@ Admin Index
                         <option value="tutor__phonicsex">Phonics Program</option>
                         <option value="tutor__availability">Availability</option>
                     </select>
+
+                    <!-- Order options -->
                     <label>Order By</label>
                     <select name="order" placeholder="Email" aria-label="Order By">
                         <option value="email">Email</option>
@@ -67,12 +74,11 @@ Admin Index
                     </select>
                     <br><label>When searching by state certification, enter the two-character state abbreviation.</label>
                     
+                    <!-- Filter options -->
+                    <!-- Input names correspond to filter options in owner/views.py -->
                     <br><label>Filter By:</label><br>
-
-            <div class= checkboxs>
-                
-                    <fieldset class="checkboxs1">
-                        
+                    <div class= checkboxs>
+                    <fieldset class="checkboxs1">   
                     <div class ="checkbox">
                         <input name="cert" type="checkbox" id="cer" value="Yes">
                         <label for="Yes"> Teaching Certification</label>
@@ -111,6 +117,7 @@ Admin Index
                     </div>
                     </fieldset>
 
+                    <!-- Second column of filter checkboxes -->
                     <fieldset class="checkboxs2">
                         <div class ="checkbox">
                             <input name="px" type="checkbox" id="cer" value="Fundations">
@@ -161,8 +168,10 @@ Admin Index
     </div>
 </div>
 
+<!-- Tutor table -->
 <table id="customers">
     <tr>
+        <!-- Labels across top row -->
         <th>Name</th>
         <th>Email</th>
         <th>Phone</th>
@@ -170,13 +179,13 @@ Admin Index
         <th>Certification</th>
         <th>Actions</th>
     </tr>
-    {% for user in User %}
 
+    {% for user in User %}
     <tr>
         <a href="{% url 'file' user.id %}">
-            <!-- <td><a class="btn btn-light" href="{% url 'file' user.id %}">{{user.tutor.firstname}} {{user.tutor.lastname}}</a></td> -->
+            <!-- Fields for each user -->
             <td>{{user.tutor.firstname}} {{user.tutor.lastname}}</td>
-            <td><a href="mailto:{{user}}">{{user}}</a></td>
+            <td><a href="mailto:{{user}}">{{user}}</a></td> 
             <td>{{user.tutor.phonenumber}}</td>
             <td>{{user.tutor.education}}</td>
             <td>{{user.tutor.statecert}}</td>

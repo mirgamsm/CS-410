@@ -1,3 +1,4 @@
+# Tutor forms
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
@@ -12,7 +13,6 @@ class UserRegistrationForm(UserCreationForm):
     class Meta:
         model = get_user_model()
         fields = ['email', 'password1', 'password2']
-
 
 class DateInput(forms.DateInput):
     input_type = 'date'       
@@ -40,12 +40,14 @@ class tutorWorkform(forms.ModelForm):
                   'employeraddress', 'employercity', 'employerstate', 'employerzip',
                   'currreference',
                   )
+
 class tutorQAform(forms.ModelForm):
     class Meta:
         model =Tutor
         fields = (
                 'teachercharacteristics', 'abilitiesquestion', 'availability'
                 )
+
 class imageUpload(forms.ModelForm):
     class Meta: 
         model= Tutor 

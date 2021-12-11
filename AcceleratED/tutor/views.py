@@ -1,3 +1,5 @@
+# Tutor views
+# View functions take web requests and return web responses
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import  AuthenticationForm
 from django.contrib.auth import login, logout
@@ -22,18 +24,18 @@ from django.contrib import messages
 User = get_user_model()
 
 def login_view(request):
-    # this function authenticates the user based on username and password
+    # This function authenticates the user based on username and password
     # AuthenticationForm is a form for logging a user in.
-    # if the request method is a post
+    # If the request method is a post
     if request.method == 'POST':
         # Plug the request.post in AuthenticationForm
         form = AuthenticationForm(data=request.POST)
-        # check whether it's valid:
+        # Check whether it's valid:
         if form.is_valid():
-            # get the user info from the form data and login the user
+            # Get the user info from the form data and login the user
             user = form.get_user()
             login(request, user)
-            # redirect the user to index page
+            # Redirect the user to index page
             if request.user.is_superuser:
                 return redirect('index')
             return redirect('profile')
@@ -46,7 +48,7 @@ def register_view(request):
     # This function renders the registration form page and create a new user based on the form data
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
-        # check whether it's valid: for example it verifies that password1 and password2 match
+        # Check whether it's valid: for example it verifies that password1 and password2 match
         if form.is_valid():
             newUser =form.save(commit=False)
             newUser.is_active =False
@@ -68,9 +70,11 @@ def register_view(request):
     return render(request, 'tutor/register.html', {'form': form})  
 
 def useragreement_view(request):
+    # Display user agreement
     return render(request, 'tutor/useragreement.html')
 
 def activate(request, uidb64, token):
+    # Activate tutor account via link from their email
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
         user = User.objects.get(pk=uid)
@@ -85,8 +89,11 @@ def activate(request, uidb64, token):
         return HttpResponse('Activation link is invalid!')
 
 def password_reset_request(request):
+    # Display form for password reset and send email with link to reset password
 	if request.method == "POST":
+        # Using Django's default password reset form
 		password_reset_form = PasswordResetForm(request.POST)
+        # Send email
 		if password_reset_form.is_valid():
 			data = password_reset_form.cleaned_data['email']
 			associated_users = User.objects.filter(Q(email=data))
@@ -105,7 +112,7 @@ def password_reset_request(request):
 					}
 					email = render_to_string(email_template_name, c)
 					try:
-						send_mail(subject, email, 'admin@example.com' , [user.email], fail_silently=False)
+						send_mail(subject, email, 'no.reply.accelerated.learning@gmail.com' , [user.email], fail_silently=False)
 					except BadHeaderError:
 						return HttpResponse('Invalid header found.')
 					return redirect ('password_reset_done')
@@ -114,6 +121,7 @@ def password_reset_request(request):
 
 @login_required(login_url='login')
 def profile_view(request):
+    # Tutor profile page
     User = get_user_model()
     user = User.objects.get(email=request.user.email)
     tutor = Tutor.objects.filter(email=user)
@@ -121,6 +129,7 @@ def profile_view(request):
 
 @login_required(login_url='login')
 def del_account(request):
+    # Delete account and redirect to login page
     User = get_user_model()
     current =User.objects.get(id=request.user.id)
     current.tutor.resume.delete()
@@ -129,11 +138,13 @@ def del_account(request):
     return redirect('login')
 
 def logout_view(request):
+    # Log out tutor
     logout(request)
     return redirect('login')
 
 @login_required(login_url='login')
 def edit_personal_view(request):
+    # Edit personal information
     profiles = Tutor.objects.get(email_id=request.user.id)
     form = tutorPersonalform(request.POST or None, instance=profiles)
     if form.is_valid():
@@ -143,6 +154,7 @@ def edit_personal_view(request):
     
 @login_required(login_url='login')    
 def edit_edu_view(request):
+    # Edit education section
     profiles = Tutor.objects.get(email_id=request.user.id)
     form = tutorEduform(request.POST or None, instance=profiles)
     if form.is_valid():
@@ -152,6 +164,7 @@ def edit_edu_view(request):
 
 @login_required(login_url='login')
 def edit_work_view(request):
+    # Edit work information
     profiles = Tutor.objects.get(email_id=request.user.id)
     form = tutorWorkform(request.POST or None, instance=profiles)
     if form.is_valid():
@@ -161,6 +174,7 @@ def edit_work_view(request):
 
 @login_required(login_url='login')
 def edit_qa_view(request):
+    # Edit questionnaire section
     profiles = Tutor.objects.get(email_id=request.user.id)
     form = tutorQAform(request.POST or None, instance=profiles)
     if form.is_valid():
@@ -170,6 +184,7 @@ def edit_qa_view(request):
 
 @login_required(login_url='login')
 def imgUpload_view(request):
+    # Upload documents
     profiles = Tutor.objects.get(email_id=request.user.id)
     form = imageUpload(request.POST or None, request.FILES or None, instance=profiles)
     if form.is_valid():

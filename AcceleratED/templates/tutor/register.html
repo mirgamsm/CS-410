@@ -1,3 +1,5 @@
+<!-- Register tutor account -->
+<!-- Upon registration, tutor must confirm their email address -->
 {% extends 'tutor/base.html' %}
 {% load crispy_forms_filters %}
 
@@ -15,6 +17,7 @@ Register
                 <form action="{% url 'register' %}" method="post">
                     {% csrf_token %}
                     {{ form|crispy }}
+                    <!-- Must agree to the user agreement in order to register -->
                     <p><input type="checkbox" name="terms" required>
                         <label for="field_terms">I have read and I agree to the 
                             <a href="{% url 'useragreement' %}">User Agreement</a>.</label></p>

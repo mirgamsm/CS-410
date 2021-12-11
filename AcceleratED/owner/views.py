@@ -1,6 +1,7 @@
+# Admin views
+# View functions take web requests and return web responses
 from django.contrib.auth import get_user_model, logout
 from django.shortcuts import redirect, render
-
 from tutor.models import Tutor
 
 def index_view(request):
@@ -12,13 +13,13 @@ def index_view(request):
             search_type = 'contains'
             filter = by + '__' + search_type
             ordered = request.POST['order']
+            # Filter options for availability, certification, phonics, and education
             avail = request.POST.getlist('avail')
             cert = request.POST.getlist('cert')
             px = request.POST.getlist('px')
             edu = request.POST.getlist('edu')
             user = User.objects.filter(
                 **{filter: searched}).order_by(ordered)
-            # Filter options for availability, certification, phonics, and education
             for a in avail:
                 user =user.filter(tutor__availability__contains=a)
             for c in cert:

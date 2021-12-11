@@ -1,3 +1,5 @@
+/* Styles for AcceleratED app: Colors of buttons and background, formatting, etc. */
+
 html{
     height: 100%;
 }
@@ -7,7 +9,7 @@ body{
     margin: 0;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-image: linear-gradient(#a8eb81,#73c543);
+    background-image: linear-gradient(#b4e597,#5da534);
     padding-top: 50px;
     overflow-wrap: break-word;
     width: 100vw;
@@ -15,7 +17,7 @@ body{
 
 .card{
     box-shadow: 0 8px 8px 0 #00000040;
-    background-color: #d6eeab;
+    background-color: #cfe5c2;
     margin-bottom: 20px;
     overflow-wrap: break-word;
 }
@@ -48,7 +50,7 @@ form > .alert > ul > li{
 }
 
 tr {
-    border-bottom: 2px solid #73c543;
+    border-bottom: 2px solid #5da534;
 }
 .del_btn{
     color: #e0e0e0;

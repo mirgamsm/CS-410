@@ -1,3 +1,6 @@
+# Tutor database table
+# If changes are made to the models, run 'python manage.py makemigrations'
+# Then run 'python manage.py migrate' to apply the migrations
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -73,58 +76,17 @@ class Tutor(models.Model):
     )
     STATE_CHOICES = (
         (
-            ('AL','AL'),
-            ('AK','AK'),
-            ('AR','AR'),
-            ('AZ','AZ'),
-            ('CA','CA'),
-            ('CO','CO'),
-            ('CT','CT'),
-            ('DC','DC'),
-            ('DE','DE'),
-            ('FL','FL'),
-            ('GA','GA'),
-            ('HI','HI'),
-            ('IA','IA'),
-            ('ID','ID'),
-            ('IL','IL'),
-            ('IN','IN'),
-            ('KS','KS'),
-            ('KY','KY'),
-            ('LA','LA'),
-            ('MA','MA'),
-            ('MD','MD'),
-            ('ME','ME'),
-            ('MI','MI'),
-            ('MN','MN'),
-            ('MO','MO'),
-            ('MS','MS'),
-            ('MT','MT'),
-            ('NC','NC'),
-            ('NE','NE'),
-            ('NH','NH'),
-            ('NJ','NJ'),
-            ('NM','NM'),
-            ('NV','NV'),
-            ('NY','NY'),
-            ('ND','ND'),
-            ('OH','OH'),
-            ('OK','OK'),
-            ('OR','OR'),
-            ('PA','PA'),
-            ('RI','RI'),
-            ('SC','SC'),
-            ('SD','SD'),
-            ('TN','TN'),
-            ('TX','TX'),
-            ('UT','UT'),
-            ('VT','VT'),
-            ('VA','VA'),
-            ('WA','WA'),
-            ('WI','WI'),
-            ('WV','WV'),
-            ('WY','WY'),
-            ('None','None')
+            ('AL','AL'), ('AK','AK'), ('AR','AR'), ('AZ','AZ'), ('CA','CA'),
+            ('CO','CO'), ('CT','CT'), ('DC','DC'), ('DE','DE'), ('FL','FL'),
+            ('GA','GA'), ('HI','HI'), ('IA','IA'), ('ID','ID'), ('IL','IL'),
+            ('IN','IN'), ('KS','KS'), ('KY','KY'), ('LA','LA'), ('MA','MA'),
+            ('MD','MD'), ('ME','ME'), ('MI','MI'), ('MN','MN'), ('MO','MO'),
+            ('MS','MS'), ('MT','MT'), ('NC','NC'), ('NE','NE'), ('NH','NH'),
+            ('NJ','NJ'), ('NM','NM'), ('NV','NV'), ('NY','NY'), ('ND','ND'),
+            ('OH','OH'), ('OK','OK'), ('OR','OR'), ('PA','PA'), ('RI','RI'),
+            ('SC','SC'), ('SD','SD'), ('TN','TN'), ('TX','TX'), ('UT','UT'),
+            ('VT','VT'), ('VA','VA'), ('WA','WA'), ('WI','WI'), ('WV','WV'),
+            ('WY','WY'), ('None','None')
         )
     )
     LANGUAGE_CHOICES = (
