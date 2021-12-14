@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from .models import Tutor
 from django.shortcuts import render, redirect
-from django.core.mail import message, send_mail, BadHeaderError
+from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.models import User
@@ -19,14 +19,13 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes, force_text
 from django.contrib.sites.shortcuts import get_current_site
-from django.contrib import messages
 
+"""Set User to Abstract Model"""
 User = get_user_model()
 
+
+"""Controller for initial login page of the app"""
 def login_view(request):
-    # This function authenticates the user based on username and password
-    # AuthenticationForm is a form for logging a user in.
-    # If the request method is a post
     if request.method == 'POST':
         # Plug the request.post in AuthenticationForm
         form = AuthenticationForm(data=request.POST)
@@ -44,6 +43,11 @@ def login_view(request):
         form = AuthenticationForm()
     return render(request, 'tutor/index.html', {'form': form})
 
+
+
+
+
+"""Controller for Tutor registration page"""
 def register_view(request):
     # This function renders the registration form page and create a new user based on the form data
     if request.method == 'POST':
@@ -69,10 +73,14 @@ def register_view(request):
         form = UserRegistrationForm()
     return render(request, 'tutor/register.html', {'form': form})  
 
+
+"""Controller for User Agreement page"""
 def useragreement_view(request):
     # Display user agreement
     return render(request, 'tutor/useragreement.html')
 
+
+"""Controller for Tutor Activation landing page"""
 def activate(request, uidb64, token):
     # Activate tutor account via link from their email
     try:
@@ -88,6 +96,8 @@ def activate(request, uidb64, token):
     else:
         return HttpResponse('Activation link is invalid!')
 
+
+"""Controller for Tutor password reset request page"""
 def password_reset_request(request):
     # Display form for password reset and send email with link to reset password
 	if request.method == "POST":
@@ -119,28 +129,43 @@ def password_reset_request(request):
 	password_reset_form = PasswordResetForm()
 	return render(request=request, template_name="tutor/password/password_reset.html", context={"password_reset_form":password_reset_form})
 
+
+"""Controller for Tutor profile view page"""
 @login_required(login_url='login')
 def profile_view(request):
     # Tutor profile page
-    User = get_user_model()
     user = User.objects.get(email=request.user.email)
     tutor = Tutor.objects.filter(email=user)
     return render(request, 'tutor/profile.html', {'authenticated': True, "Tutor": tutor, "User": user})
 
+
+"""Controller for deleting 'personal' tutor account"""
 @login_required(login_url='login')
 def del_account(request):
     # Delete account and redirect to login page
-    User = get_user_model()
     current =User.objects.get(id=request.user.id)
     current.tutor.resume.delete()
     current.tutor.image.delete()
     current.delete()
     return redirect('login')
 
+"""Controller for Tutor logout"""
 def logout_view(request):
     # Log out tutor
     logout(request)
     return redirect('login')
+
+
+@login_required(login_url='login')
+def edit_personal_view(request):
+    # Edit personal information
+    profiles = Tutor.objects.get(email_id=request.user.id)
+    form = tutorPersonalform(request.POST or None, instance=profiles)
+    if form.is_valid():
+        form.save()
+        return redirect('profile')
+    return render(request, 'tutor/personal.html', {'authenticated': True, 'form': form})
+
 
 @login_required(login_url='login')
 def edit_personal_view(request):
