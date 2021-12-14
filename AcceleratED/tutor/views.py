@@ -156,6 +156,14 @@ def logout_view(request):
     return redirect('login')
 
 
+
+
+"""The following are Controllers for the edit pages"""
+# These Views are very similar and could be refactored into one view with if/elif statements
+
+
+
+"""Edit Personal Page"""
 @login_required(login_url='login')
 def edit_personal_view(request):
     # Edit personal information
@@ -167,16 +175,7 @@ def edit_personal_view(request):
     return render(request, 'tutor/personal.html', {'authenticated': True, 'form': form})
 
 
-@login_required(login_url='login')
-def edit_personal_view(request):
-    # Edit personal information
-    profiles = Tutor.objects.get(email_id=request.user.id)
-    form = tutorPersonalform(request.POST or None, instance=profiles)
-    if form.is_valid():
-        form.save()
-        return redirect('profile')
-    return render(request, 'tutor/personal.html', {'authenticated': True, 'form': form})
-    
+"""Edit Education Page"""
 @login_required(login_url='login')    
 def edit_edu_view(request):
     # Edit education section
@@ -187,6 +186,8 @@ def edit_edu_view(request):
         return redirect('profile')
     return render(request, 'tutor/edu.html', {'authenticated': True, 'form': form})
 
+
+"""Edit Work Experience Page"""
 @login_required(login_url='login')
 def edit_work_view(request):
     # Edit work information
@@ -197,6 +198,8 @@ def edit_work_view(request):
         return redirect('profile')
     return render(request, 'tutor/work.html', {'authenticated': True, 'form': form})
 
+
+"""Edit QA Page"""
 @login_required(login_url='login')
 def edit_qa_view(request):
     # Edit questionnaire section
@@ -207,6 +210,8 @@ def edit_qa_view(request):
         return redirect('profile')
     return render(request, 'tutor/qa.html', {'authenticated': True, 'form': form})
 
+
+"""Edit File Upload Page"""
 @login_required(login_url='login')
 def imgUpload_view(request):
     # Upload documents

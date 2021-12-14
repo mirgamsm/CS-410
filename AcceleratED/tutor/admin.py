@@ -5,6 +5,10 @@ from django.utils.translation import ugettext_lazy as _
 from .models import User, Tutor
 admin.site.register(Tutor)
 
+
+
+"""This file tells the built in Admin app to use the abstract User Model"""
+
 @admin.register(User)
 class UserAdmin(DjangoUserAdmin):
     """Define admin model for custom User model with no email field."""

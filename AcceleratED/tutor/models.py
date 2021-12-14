@@ -54,6 +54,8 @@ class User(AbstractUser):
     objects = UserManager()
 
 class Tutor(models.Model):
+    """Tutor model"""
+
     PHONICS_CHOICES = (
         ('Fundations', 'Fundations'),
         ('Fountas & Pinnell Literacy', 'Fountas & Pinnell Literacy'),

@@ -2,10 +2,10 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
-from django.db.models import fields
-from django.contrib.auth.forms import PasswordResetForm
-from django.core.validators import validate_integer
 from tutor.models import Tutor
+
+
+
 
 class UserRegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True, label='Email')

@@ -4,6 +4,9 @@ from django.contrib.auth import get_user_model, logout
 from django.shortcuts import redirect, render
 from tutor.models import Tutor
 
+
+
+"""Controller for index page of the owner app"""
 def index_view(request):
     if request.user.is_superuser:
         User = get_user_model()
@@ -36,6 +39,7 @@ def index_view(request):
         return redirect('login')
 
 
+"""Controller deleting Tutor accunts"""
 def del_account(request, id):
     User = get_user_model()
     current = User.objects.get(id=id)
@@ -44,11 +48,15 @@ def del_account(request, id):
     current.delete()
     return redirect('index')
 
+
+"""Controller for view Tutor Profile page"""
 def profile_view(request, id):
     User = get_user_model()
     user = User.objects.get(id=id)
     return render(request, 'owner/profile.html', {'authenticated': True, "User": user})
 
+
+"""Controller Owner logout"""
 def logout_view(request):
     logout(request)
     return redirect('login')
